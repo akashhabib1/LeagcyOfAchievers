@@ -630,7 +630,7 @@
                                     <textarea id="userGoalInput"
                                         class="peer block w-full px-4 pt-4 pb-2 h-28 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 placeholder-transparent resize-y"></textarea>
                                     <label for="userGoalInput" class="absolute left-4 transition-all duration-200 transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-focus:scale-85 peer-focus:text-blue-accent text-base">
-                                        What's your goal or concern? Let's tailor it for you.
+                                        Question?
                                     </label>
                                 </div>
                                 <button id="generateBenefitBtn"
@@ -732,7 +732,7 @@
                     <ul>
                         <li><strong>Name and Contact Data:</strong> We collect your first and last name, email address, postal address, phone number, and other similar contact data.</li>
                         <li><strong>Credentials:</strong> We collect passwords, password hints, and similar security information used for authentication and account access.</li>
-                        <li><strong>Demographic Information:</strong> We collect information such as your age, gender, city, and other demographic data.</li>
+                        <li><strong>Demographic Information:</strong> We collect information suchs as your age, gender, city, and other demographic data.</li>
                     </ul>
                     <h3>2. How We Use Your Information</h3>
                     <p>We use personal information collected via our website for a variety of business purposes described below. We process your personal information for these purposes in reliance on our legitimate business interests, in order to enter into or perform a contract with you, with your consent, and/or for compliance with our legal obligations.</p>
@@ -765,7 +765,6 @@
                 <div class="prose dark:prose-invert max-w-none">
                     <p>The information provided on this website and through our work-from-home opportunity is for general informational purposes only. While we strive to provide accurate and up-to-date information, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose.</p>
                     <p>Any reliance you place on such information is therefore strictly at your own risk. We do not guarantee any specific income level or earnings. The income potential mentioned is an estimate based on average performance and requires consistent effort, dedication, and adherence to our guidelines. Individual results may vary significantly based on effort, skills, and market conditions.</p>
-                    <p>We are not responsible for any loss or damage, including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, the use of this website or participation in our program.</p>
                     <p>Through this website, you may be able to link to other websites which are not under the control of [Your Company Name]. We have no control over the nature, content, and availability of those sites. The inclusion of any links does not necessarily imply a recommendation or endorse the views expressed within them.</p>
                     <p>Every effort is made to keep the website up and running smoothly. However, [Your Company Name] takes no responsibility for, and will not be liable for, the website being temporarily unavailable due to technical issues beyond our control.</p>
                 </div>
@@ -907,7 +906,7 @@
                     // Initialize or re-initialize the main video player
                     if (!player || player.getVideoUrl().indexOf('xl2DncwaRNY') === -1) {
                         if (player) {
-                            player.destroy(); // Destroy existing player if it's not the correct video
+                            player.destroy(); // Destroy existing player if an old player exists
                         }
                         player = new YT.Player('youtube-player', {
                             videoId: 'xl2DncwaRNY',
@@ -1349,8 +1348,9 @@
 
         // --- Gemini API Integration ---
         // !!! IMPORTANT: The API key will be provided by Canvas at runtime.
-        // DO NOT hardcode your API key here for production environments.
-        const GEMINI_API_KEY = "";
+        // If you are hosting this on GitHub Pages or another server, you MUST replace "" with your actual Gemini API key.
+        // You can obtain a key from Google AI Studio: https://aistudio.google.com/app/apikey
+        const GEMINI_API_KEY = "AIzaSyAEbPZBE_w8ea0QIR-dQCT44r2UjJMQNS0"; 
 
         async function generateCourseBenefit() {
             const userQuestion = userGoalInput.value.trim(); // Renamed to userQuestion for clarity
@@ -1400,7 +1400,7 @@
             chatHistory.push({ role: "user", parts: [{ text: prompt }] });
 
             const payload = { contents: chatHistory };
-            const apiKey = ""; // Canvas will provide this at runtime, ENSURE THIS IS SECURELY HANDLED IN PRODUCTION
+            const apiKey = GEMINI_API_KEY; // Use the defined API key
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
             console.log("Attempting to call Gemini API with payload:", payload);

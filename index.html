@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Website - 2025 UI/UX</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom Tailwind Configuration - Updated for Royal Blue and Deep Sky Blue Theme */
+        :root {
+            /* Dark Theme Colors */
+            --color-dark-bg-primary: #121212; /* Very Dark, almost black */
+            --color-dark-bg-secondary: #1a1a1a; /* Slightly lighter dark for cards */
+            --color-blue-accent: #00BFFF; /* Deep Sky Blue - new accent color */
+            --color-royal-blue-primary: #000080; /* Royal Blue */
+            --color-royal-blue-secondary: #0F0F8F; /* Slightly lighter royal blue */
+            --color-soft-white: #E0E0E0; /* Soft white for primary text on dark */
+            --color-light-gray-text: #B0B0B0; /* Light gray for secondary text on dark */
+
+            /* Light Theme Colors */
+            --color-light-bg-primary: #F5F5DC; /* Soft Beige - primarily for fallback if image fails or for transparency */
+            --color-light-bg-secondary: #ffffff; /* Pure white for cards on light */
+            --color-dark-text-primary: #1a202c; /* Dark text for primary text in light theme */
+            --color-dark-text-secondary: #4a5568; /* Darker gray for secondary text/labels in light theme */
+            --color-light-placeholder-text: #999999; /* Slightly darker gray for placeholders in light theme */
+
+            /* Validation Colors */
+            --color-success-green: #228B22; /* Forest Green for better visibility in light theme */
+            --color-error-red: #FF4500; /* Orange Red for better visibility in light theme (keeping red for error) */
+
+            /* Tailwind-specific color definitions (to be primarily used in tailwind.config.js) */
+            --tw-color-blue-accent: 0 191 255; /* 00BFFF - Deep Sky Blue */
+            --tw-color-royal-blue-primary: 0 0 128; /* 000080 */
+            --tw-color-royal-blue-secondary: 15 15 143; /* 0F0F8F */
+            --tw-color-soft-white: 224 224 224; /* E0E0E0 */
+            --tw-color-light-gray-text: 176 176 176; /* B0B0B0 */
+            --tw-color-success-green: 34 139 34; /* Forest Green (Hex: #228B22) */
+            --tw-color-error-red: 255 69 0; /* Orange Red (Hex: #FF4500) */
+            --tw-color-light-bg-primary: 245 245 220;
+            --tw-color-light-bg-secondary: 255 255 255;
+            --tw-color-dark-text-primary: 26 32 44;
+            --tw-color-dark-text-secondary: 74 85 104;
+            --tw-color-light-placeholder-text: 153 153 153;
+        }
+
+        /* Base Body Styling - Defaults to Light Theme */
+        body {
+            background-color: var(--color-light-bg-primary);
+            color: var(--color-dark-text-primary);
+            transition: background-color 0.3s, color 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Dark Mode Styling */
+        body.dark {
+            background-color: var(--color-dark-bg-primary);
+            color: var(--color-soft-white);
+        }
+
+        /* Card Backgrounds */
+        .registration-card,
+        .info-card,
+        .payment-processing-card,
+        .success-card,
+        .policy-card {
+            background-color: var(--color-light-bg-secondary); /* White for light theme cards */
+            color: var(--color-dark-text-primary); /* Dark text for light theme cards */
+            border-color: #e2e8f0; /* Light border */
+            border-radius: 1.5rem;
+        }
+
+        body.dark .registration-card,
+        body.dark .info-card,
+        body.dark .payment-processing-card,
+        body.dark .success-card,
+        body.dark .policy-card {
+            background-color: var(--color-dark-bg-secondary);
+            color: var(--color-soft-white);
+            border-color: #4a5568;
+        }
+
+        /* Text Colors - Ensure general text uses inherited color */
+        body p, body span, body label, body h2, body h3 {
+            color: inherit;
+        }
+
+        /* Fix for "Register Today" heading and "Step X of Y" text in light theme */
+        body:not(.dark) .registration-card h2 {
+            color: #1a202c;
+        }
+        body:not(.dark) .registration-card p {
+            color: #4a5568;
+        }
+
+        /* Input Fields - Default neutral state */
+        input, select, textarea {
+            background-color: #F8F8F8;
+            color: var(--color-dark-text-primary);
+            border: 1px solid #cbd5e0;
+            outline: none;
+            box-shadow: none;
+            transition: border-color 0.2s ease-in-out;
+            border-radius: 0.5rem;
+        }
+        input::placeholder, select::placeholder, textarea::placeholder {
+            color: #777777;
+            opacity: 1;
+        }
+
+        /* MODIFIED: Dark Mode Input Fields, Labels, and Placeholders */
+        body.dark input,
+        body.dark select,
+        body.dark textarea {
+            background-color: #2E2E2E; /* Uniform dark gray background */
+            color: var(--color-soft-white); /* Keep text soft white for readability */
+            border: 1px solid #444; /* Darker border for contrast */
+            box-shadow: 0 0 5px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+        }
+        body.dark input::placeholder,
+        body.dark select::placeholder,
+        body.dark textarea::placeholder {
+            color: #3B82F6; /* Visible blue shade for placeholders */
+            opacity: 1;
+        }
+        body.dark .relative.group label {
+            color: #3B82F6; /* Visible blue shade for floating labels */
+        }
+        /* END MODIFIED */
+
+
+        /* Floating label animation focus color */
+        .group-focus-within\:text-blue-500:has(input:focus) { /* More specific selector if needed */
+            color: var(--color-blue-accent);
+        }
+        body.dark .group-focus-within\:text-blue-500:has(input:focus) { /* Redundant if same color */
+            color: var(--color-blue-accent);
+        }
+
+        /* Dark Mode Toggle Button */
+        #darkModeToggle {
+            background-color: #cbd5e0;
+            color: #2d3748;
+            border: 1px solid #a0aec0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(0px);
+            border-radius: 9999px;
+        }
+        body.dark #darkModeToggle {
+            background-color: rgba(0, 0, 128, 0.5);
+            color: var(--color-blue-accent);
+            border: 1px solid rgba(0, 0, 128, 0.7);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Landing Page Text Colors */
+        .landing-heading {
+            color: #FFFFFF;
+        }
+        .landing-subheading {
+            color: #F0F0F0;
+        }
+
+        /* Floating label styles */
+        .relative.group input,
+        .relative.group select,
+        .relative.group textarea {
+            padding-top: 1.5rem;
+            padding-bottom: 0.5rem;
+        }
+        .relative.group input:not(:placeholder-shown) + label,
+        .relative.group input:focus + label,
+        .relative.group select:not([value=""]) + label,
+        .relative.group select:focus + label,
+        .relative.group textarea:not(:placeholder-shown) + label,
+        .relative.group textarea:focus + label {
+            transform: translateY(-0.75rem) scale(0.85);
+            color: var(--color-blue-accent);
+        }
+        .relative.group label {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            pointer-events: none;
+            transition: all 0.2s ease-out;
+            font-size: 1rem;
+            color: #666666;
+        }
+        /* MODIFIED: Ensure floating label color is consistent with placeholders in dark mode */
+        body.dark .relative.group label {
+            color: #3B82F6; /* Visible blue shade for floating labels in dark mode */
+        }
+        /* END MODIFIED */
+
+        /* Gradient Button Animation */
+        .gradient-button {
+            background: linear-gradient(90deg, var(--color-royal-blue-primary), var(--color-royal-blue-secondary));
+            color: var(--color-blue-accent);
+            border: 1px solid rgba(0, 191, 255, 0.3);
+            background-size: 200% 200%;
+            animation: gradient-flow 3s ease infinite;
+            border-radius: 0.75rem;
+        }
+        body:not(.dark) .gradient-button { /* Apply to light theme explicitly */
+            background: linear-gradient(90deg, #333399, #000066);
+            color: white;
+            border: none;
+        }
+
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .gradient-button:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
+        }
+        body:not(.dark) .gradient-button:hover { /* Apply to light theme explicitly */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Glassmorphism Button */
+        .glassmorphism-btn {
+            background: rgba(0, 0, 128, 0.8);
+            border-radius: 1rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(0, 0, 128, 0.9);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        body:not(.dark) .glassmorphism-btn { /* Apply to light theme explicitly */
+            background: rgba(0, 0, 128, 0.9);
+            border: 1px solid rgba(0, 0, 128, 1);
+            color: white;
+        }
+
+        .glassmorphism-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 191, 255, 0.3);
+        }
+        body:not(.dark) .glassmorphism-btn:hover { /* Apply to light theme explicitly */
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1), 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Pulse animation for play button */
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        /* Confetti animation */
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            opacity: 0;
+            animation: confetti-fall 3s ease-out forwards;
+            pointer-events: none;
+        }
+        /* Randomize confetti colors */
+        .confetti:nth-child(1n) { background-color: var(--color-blue-accent); }
+        .confetti:nth-child(2n) { background-color: var(--color-royal-blue-primary); animation-delay: 0.1s; }
+        .confetti:nth-child(3n) { background-color: var(--color-soft-white); animation-delay: 0.2s; }
+        .confetti:nth-child(4n) { background-color: var(--color-blue-accent); animation-delay: 0.3s; }
+        .confetti:nth-child(5n) { background-color: var(--color-royal-blue-secondary); animation-delay: 0.4s; }
+        .confetti:nth-child(6n) { background-color: var(--color-error-red); animation-delay: 0.5s; }
+
+
+        /* Spinner animation */
+        .spinner {
+            border: 4px solid rgba(0, 191, 255, 0.3);
+            border-top: 4px solid var(--color-blue-accent);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        body:not(.dark) .spinner { /* Apply to light theme explicitly */
+            border: 4px solid rgba(0, 0, 128, 0.3);
+            border-top: 4px solid var(--color-royal-blue-primary);
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Floating icons/shapes animation */
+        .floating-shape {
+            position: absolute;
+            background-color: rgba(0, 191, 255, 0.05);
+            border-radius: 50%;
+            animation: float 10s infinite ease-in-out;
+            pointer-events: none;
+        }
+        body:not(.dark) .floating-shape { /* Apply to light theme explicitly */
+            background-color: rgba(0, 0, 128, 0.05);
+        }
+        .floating-shape:nth-child(1) { width: 40px; height: 40px; top: 10%; left: 5%; animation-delay: 0s; }
+        .floating-shape:nth-child(2) { width: 60px; height: 60px; top: 30%; right: 10%; animation-delay: 2s; background-color: rgba(0, 191, 255, 0.07); }
+        body:not(.dark) .floating-shape:nth-child(2) { background-color: rgba(0, 0, 128, 0.07); }
+        .floating-shape:nth-child(3) { width: 50px; height: 50px; bottom: 15%; left: 20%; animation-delay: 4s; background-color: rgba(0, 191, 255, 0.06); }
+        body:not(.dark) .floating-shape:nth-child(3) { background-color: rgba(0, 0, 128, 0.06); }
+        .floating-shape:nth-child(4) { width: 70px; height: 70px; top: 5%; right: 25%; animation-delay: 6s; }
+        body:not(.dark) .floating-shape:nth-child(4) { background-color: rgba(0, 191, 255, 0.08); }
+        body:not(.dark) .floating-shape:nth-child(4) { background-color: rgba(0, 0, 128, 0.08); }
+        .floating-shape:nth-child(5) { width: 30px; height: 30px; bottom: 5%; left: 50%; animation-delay: 8s; background-color: rgba(0, 191, 255, 0.08); }
+        body:not(.dark) .floating-shape:nth-child(5) { background-color: rgba(0, 0, 128, 0.08); }
+
+        @keyframes float {
+            0% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(20px) translateX(10px); }
+            100% { transform: translateY(0px) translateX(0px); }
+        }
+
+        /* Sticky button for mobile */
+        @media (max-width: 767px) {
+            #video-page .sticky-cta-wrapper {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                padding: 1rem;
+                background: linear-gradient(to top, rgba(255,255,255,0.9), rgba(255,255,255,0));
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+                z-index: 50;
+            }
+            body.dark #video-page .sticky-cta-wrapper {
+                background: linear-gradient(to top, rgba(18,18,18,0.9), rgba(18,18,18,0));
+            }
+        }
+
+        /* Page transition animations (standard fade) */
+        .page-transition-exit-active {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+        .page-transition-enter-active {
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+        .page-transition-enter-to {
+            opacity: 1;
+        }
+
+        /* Background Video Styles */
+        #background-video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
+            background-color: #000;
+        }
+
+        #background-video-container iframe {
+            width: 122%;
+            height: 122%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Play button overlay styles */
+        #play-button-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out;
+        }
+        #play-button-overlay.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Confetti for success page */
+        .confetti-backdrop-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Scale animation for success icon */
+        @keyframes scaleIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* New styles for price highlighting */
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1rem;
+            margin-right: 8px;
+        }
+
+        .discounted-price {
+            color: #d32f2f;
+            font-weight: bold;
+            font-size: 1.5rem;
+            animation: pulse 1.2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.85; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Price Display Box Styling */
+        .price-display-box {
+            background: linear-gradient(to right, #fff3e0, #ffe0b2);
+            border-radius: 12px;
+            padding: 12px 20px;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 24px;
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark .price-display-box {
+            background-color: var(--color-dark-bg-secondary);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Price Text Colors for Dark Mode */
+        body.dark .price-display-box .original-price {
+            color: var(--color-light-gray-text);
+        }
+
+        body.dark .price-display-box .discounted-price {
+            color: var(--color-error-red);
+        }
+
+        /* Ensure the "Limited Time!" span remains visible in dark mode */
+        body.dark .price-display-box span[style*="background:#ff5252"] {
+            background-color: #FF4500 !important; /* Use error-red for consistency, or keep original if preferred */
+            color: white !important;
+        }
+
+        /* Styling for the "See My Custom Fit" button */
+        #generateBenefitBtn {
+            border: 2px solid var(--color-blue-accent); /* Blue border for both modes */
+            transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for border */
+        }
+        #generateBenefitBtn:hover {
+            border-color: rgba(0, 191, 255, 0.8); /* Slightly transparent blue on hover */
+        }
+    </style>
+</head>
+<body class="font-inter transition-colors duration-300">
+
+    <div id="background-video-container">
+        <iframe id="background-youtube-player"
+            src="https://www.youtube-nocookie.com/embed/u2IEDVXPcc8?controls=0&autoplay=1&mute=1&loop=1&playlist=u2IEDVXPcc8&modestbranding=1&rel=0&enablejsapi=1"
+            frameborder="0"
+            allow="autoplay; encrypted-media;"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <button id="darkModeToggle" class="fixed top-4 right-4 z-50 p-3 rounded-full shadow-lg focus:outline-none transition-colors duration-300">
+        <i class="fas fa-sun" id="darkModeIcon"></i>
+    </button>
+
+    <div id="pages">
+        <section id="landing-page" class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+
+            <div class="container mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20 relative z-10">
+                <div class="text-center lg:text-left lg:w-1/2">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-poppins font-bold leading-tight landing-heading mb-6">
+                        🏠 Work From Home & Unlock Your Earning Potential
+                    </h1>
+                    <p class="text-lg sm:text-xl landing-subheading mb-4 max-w-lg mx-auto lg:mx-0">
+                        ⏰ Just 3–4 Hours a Day | No Prior Experience Needed <br>
+                        We offer a flexible work-from-home opportunity where you can achieve significant earnings based on your consistent effort and dedication, by working just 3 to 4 hours a day. All work is online, so you can do it from home with just a smartphone and a good internet connection. This is ideal for students, homemakers, part-timers, or anyone looking to build a secondary income stream.
+                    </p>
+                    <!-- Removed the bulleted list of roles as per the image -->
+                    <p class="text-sm italic text-gray-300 mt-4 block">*Individual results may vary. Earnings are dependent on effort, skills, and market conditions.</p>
+                    <p class="text-lg sm:text-xl font-semibold landing-subheading mb-8 max-w-lg mx-auto lg:mx-0">
+                        👉 Register Now to unlock access to our Free Introduction Session and discover how you can get started today!
+                    </p>
+                </div>
+
+                <div class="w-full lg:w-1/2 rounded-3xl shadow-xl border p-8 sm:p-10 registration-card">
+                    <h2 class="text-2xl font-poppins font-semibold text-center mb-8">Register Today!</h2>
+
+                    <form id="registration-form" action="https://script.google.com/macros/s/AKfycbz01zTSVv9528tk3YcYrlecPL6jY0Qff63Xj7zzwDzDbrWTfQ40sNX3dWXs4YvwKgMf/exec" method="post" class="space-y-6">
+                        <div class="relative group">
+                            <input type="text" id="name" name="name" placeholder=" " required
+                                class="peer block w-full px-4 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 placeholder-transparent">
+                            <label for="name" class="absolute left-4 transition-all duration-200 transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-focus:scale-85 peer-focus:text-blue-accent text-base">Name</label>
+                        </div>
+                        <div class="relative group">
+                            <input type="text" id="city" name="city" placeholder=" " required
+                                class="peer block w-full px-4 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 placeholder-transparent">
+                            <label for="city" class="absolute left-4 transition-all duration-200 transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-focus:scale-85 peer-focus:text-blue-accent text-base">City</label>
+                        </div>
+                        <div class="relative group">
+                            <input type="email" id="email" name="email" placeholder=" " required
+                                class="peer block w-full px-4 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 placeholder-transparent">
+                            <label for="email" class="absolute left-4 transition-all duration-200 transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-focus:scale-85 peer-focus:text-blue-accent text-base">Email</label>
+                        </div>
+                        <div class="relative group">
+                            <input type="tel" id="phone" name="phone" placeholder=" " required
+                                class="peer block w-full px-4 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 placeholder-transparent">
+                            <label for="phone" class="absolute left-4 transition-all duration-200 transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-focus:scale-85 peer-focus:text-blue-accent text-base">Phone Number</label>
+                        </div>
+                        <div class="relative group">
+                            <input type="number" id="age" name="age" placeholder=" " required min="18"
+                                class="peer block w-full px-4 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 placeholder-transparent">
+                            <label for="age" class="absolute left-4 transition-all duration-200 transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-focus:scale-85 peer-focus:text-blue-accent text-base">Age</label>
+                            <span id="age-error" class="text-sm text-error-red mt-1 hidden">Minimum age required is 18.</span>
+                        </div>
+
+                        <div class="relative group">
+                            <select id="gender" name="gender" required
+                                class="peer block w-full px-4 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 bg-white dark:bg-gray-700 appearance-none pr-8">
+                                <option value="" disabled selected>Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="prefer_not_to_say">Prefer not to say</option>
+                            </select>
+                            <label for="gender" class="absolute left-4 transition-all duration-200 transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-focus:scale-85 peer-focus:text-blue-accent text-base">Gender</label>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-gray-200">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 6.096 6.924 4.682 8.338z"/></svg>
+                            </div>
+                        </div>
+                        <div id="submissionStatusDisplay" class="mt-4 p-2 rounded-lg text-center">
+                        </div>
+
+                        <button type="submit"
+                            class="w-full py-3 mt-4 rounded-xl font-bold text-lg gradient-button shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-accent transition duration-300">
+                            Get Started <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="video-page" class="min-h-screen flex flex-col lg:flex-row items-center justify-center p-4 hidden">
+            <div class="container mx-auto flex flex-col lg:flex-row gap-8 lg:gap-12 py-12">
+                <div class="lg:w-2/3 w-full relative">
+                    <div class="relative pb-[56.25%] h-0 rounded-2xl overflow-hidden shadow-2xl">
+                        <iframe id="youtube-player" class="absolute top-0 left-0 w-full h-full"
+                            src="https://www.youtube.com/embed/xl2DncwaRNY?enablejsapi=1&autoplay=0&controls=0&modestbranding=1&rel=0"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                        <div id="play-button-overlay" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 cursor-pointer transition-opacity duration-300">
+                            <div class="p-6 rounded-full pulse-animation bg-dark-bg-secondary text-blue-accent">
+                                <i class="fas fa-play text-3xl" id="overlayPlayPauseIcon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/3 w-full p-8 rounded-2xl shadow-xl flex flex-col justify-between info-card">
+                    <div>
+                        <h2 class="text-3xl font-poppins font-bold mb-6">
+                            Unlock Your Job Opportunity!
+                        </h2>
+                        <div id="paymentDetails" class="hidden">
+                            <p class="text-lg mb-4 leading-relaxed">
+                                Congratulations! You've completed the introductory session. You now have access to the next steps for your work-from-home opportunity.
+                            </p>
+                            <div class="price-display-box">
+                                <span style="font-size: 1rem; color: #444;">Your one-time registration fee: </span>
+                                <span class="original-price">₹195</span>
+                                <span class="discounted-price">₹49</span>
+                                <span style="background:#ff5252; color:white; padding:2px 6px; border-radius:4px; font-size:0.75rem; margin-left:8px;">Limited Time!</span>
+                            </div>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                                This one-time fee of ₹49 covers your access to comprehensive training modules, a dedicated support platform, and exclusive community resources designed to help you succeed.
+                            </p>
+
+                            <div class="space-y-4 mb-10">
+                                <h3 class="text-xl font-poppins font-semibold mb-4">✅ You Now Have Access To:</h3>
+                                <div class="flex items-center">
+                                    <i class="fas fa-book text-blue-accent text-2xl mr-4"></i>
+                                    <span class="text-lg">Comprehensive Training & Resources</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-headset text-blue-accent text-2xl mr-4"></i>
+                                    <span class="text-lg">Dedicated Mentorship & Support</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fab fa-whatsapp text-success-green text-2xl mr-4"></i>
+                                    <span class="text-lg">Exclusive Community Access</span>
+                                </div>
+                                <!-- New items added here -->
+                                <div class="flex items-center">
+                                    <i class="fas fa-briefcase text-blue-accent text-2xl mr-4"></i>
+                                    <span class="text-lg">Direct Access to Work Opportunities</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-chart-line text-blue-accent text-2xl mr-4"></i>
+                                    <span class="text-lg">Performance Tracking & Growth Tools</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                                <h3 class="text-xl font-poppins font-semibold mb-4">
+                                    💫 Want to see how this fits your goals? Ask away!
+                                </h3>
+                                <div class="relative group mb-4">
+                                    <textarea id="userGoalInput"
+                                        class="peer block w-full px-4 pt-4 pb-2 h-28 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 placeholder-transparent resize-y"></textarea>
+                                    <label for="userGoalInput" class="absolute left-4 transition-all duration-200 transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-focus:scale-85 peer-focus:text-blue-accent text-base">
+                                        What's your goal or concern? Let's tailor it for you.
+                                    </label>
+                                </div>
+                                <button id="generateBenefitBtn"
+                                    class="w-full py-3 rounded-xl font-bold text-lg bg-blue-accent text-dark-bg-primary hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-accent transition duration-300">
+                                    See My Custom Fit ✨
+                                </button>
+                                <div id="aiLoadingSpinner" class="hidden flex justify-center items-center mt-4">
+                                    <div class="spinner w-8 h-8"></div>
+                                </div>
+                                <div id="aiResponseDisplay" class="mt-4 text-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sticky-cta-wrapper lg:static mt-auto lg:mt-0" id="payment-cta-wrapper">
+                        <button id="payNowButton"
+                            class="glassmorphism-btn w-full py-4 rounded-xl font-bold text-xl uppercase transition duration-300 relative overflow-hidden group">
+                            Start Your Journey <div class="confetti-container"></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="payment-page" class="min-h-screen flex flex-col items-center justify-center p-4 hidden">
+            <div class="rounded-2xl shadow-xl text-center border p-10 payment-processing-card">
+                <div class="spinner mx-auto mb-6"></div>
+                <h2 class="text-3xl font-poppins font-bold mb-4">
+                    Processing Your Application...
+                </h2>
+                <p class="text-lg">
+                    You will be securely redirected to our payment partner (Razorpay / Instamojo / PayPal) in a moment to complete your registration.
+                </p>
+            </div>
+        </section>
+
+        <section id="success-page" class="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden hidden">
+            <div class="confetti-backdrop-container absolute inset-0 pointer-events:none"></div>
+
+            <div class="rounded-2xl shadow-xl text-center border p-10 max-w-lg relative z-10 success-card">
+                <div class="text-success-green text-6xl mb-6 scale-animation">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2 class="text-4xl font-poppins font-bold mb-4">
+                    You're In! 🎉
+                </h2>
+                <p class="text-xl mb-6">
+                    We've received your ₹49 registration fee. Get ready to start earning!
+                </p>
+
+                <p class="text-lg mb-4">
+                    Sending you a WhatsApp message now...
+                </p>
+                <a href="https://wa.me/message/YM7TYTM2QYZ7E1" target="_blank"
+                    class="inline-flex items-center px-6 py-3 bg-[#25D366] text-white font-bold rounded-xl shadow-lg hover:bg-[#1DA851] transition-colors duration-300">
+                    <i class="fab fa-whatsapp text-2xl mr-3"></i> Message Akash Habib on WhatsApp
+                </a>
+            </div>
+        </section>
+
+        <section id="about-us-page" class="min-h-screen flex items-center justify-center p-4 hidden">
+            <div class="container mx-auto p-8 rounded-2xl shadow-xl border policy-card max-w-3xl">
+                <h2 class="text-3xl font-poppins font-bold mb-6 text-center">About Us</h2>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p>Welcome to our platform, where we believe in empowering individuals to achieve financial independence and professional growth from the comfort of their homes.</p>
+                    <p>We are dedicated to providing accessible and flexible work-from-home opportunities, designed for a diverse audience including students, homemakers, part-timers, and anyone seeking to build a sustainable secondary income stream.</p>
+                    <p>Our mission is to equip you with the necessary tools, training, and support to succeed. We focus on practical skills and a community-driven approach to ensure that every participant can thrive. With our comprehensive resources, dedicated mentorship, and an exclusive community, you're not just finding a job – you're building a future.</p>
+                    <p>Join us to unlock your potential, gain valuable experience, and take control of your earning journey. We are committed to fostering an.environment where hard work translates directly into tangible results, helping you earn a supplementary income based on your effort and market conditions.</p>
+                </div>
+                <div class="text-center mt-8">
+                    <button onclick="showPage('landing-page')" class="glassmorphism-btn py-3 px-6 rounded-xl font-bold text-lg">Back to Home</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="refund-policy-page" class="min-h-screen flex items-center justify-center p-4 hidden">
+            <div class="container mx-auto p-8 rounded-2xl shadow-xl border policy-card max-w-3xl">
+                <h2 class="text-3xl font-poppins font-bold mb-6 text-center">Refund Policy</h2>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p>Our refund policy is in line with our digital service delivery model. As our work-from-home opportunity provides immediate access to resources, training, and community upon successful registration, all registration fees are generally non-refundable.</p>
+                    <p>We are committed to providing value and support to all our registered participants. If you encounter technical issues that prevent you from accessing the services, and these issues cannot be resolved by our support team, a refund may be considered on a case-by-case basis.</p>
+                    <p>Any refund requests must be submitted within 7 days of registration and must be accompanied by evidence of the technical issue. We do not offer refunds for changes of mind, lack of participation, or dissatisfaction with earnings potential, as results vary based on individual effort and market conditions.</p>
+                    <p>By proceeding with registration, you acknowledge and agree to this refund policy.</p>
+                </div>
+                <div class="text-center mt-8">
+                    <button onclick="showPage('landing-page')" class="glassmorphism-btn py-3 px-6 rounded-xl font-bold text-lg">Back to Home</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="privacy-policy-page" class="min-h-screen flex items-center justify-center p-4 hidden">
+            <div class="container mx-auto p-8 rounded-2xl shadow-xl border policy-card max-w-3xl">
+                <h2 class="text-3xl font-poppins font-bold mb-6 text-center">Privacy Policy</h2>
+                <div class="prose dark:prose-invert max-w-none">
+                    <h3>1. Information We Collect</h3>
+                    <p>We collect personal information that you voluntarily provide to us when you register on the website, express an interest in obtaining information about us or our products and services, when you participate in activities on the website (such as posting messages in our online forums or entering competitions), or otherwise when you contact us.</p>
+                    <p>The personal information that we collect depends on the context of your interactions with us and the website, the choices you make and the products and features you use. The personal information we collect may include the following:</p>
+                    <ul>
+                        <li><strong>Name and Contact Data:</strong> We collect your first and last name, email address, postal address, phone number, and other similar contact data.</li>
+                        <li><strong>Credentials:</strong> We collect passwords, password hints, and similar security information used for authentication and account access.</li>
+                        <li><strong>Demographic Information:</strong> We collect information such as your age, gender, city, and other demographic data.</li>
+                    </ul>
+                    <h3>2. How We Use Your Information</h3>
+                    <p>We use personal information collected via our website for a variety of business purposes described below. We process your personal information for these purposes in reliance on our legitimate business interests, in order to enter into or perform a contract with you, with your consent, and/or for compliance with our legal obligations.</p>
+                    <ul>
+                        <li>To facilitate account creation and logon process.</li>
+                        <li>To send you marketing and promotional communications.</li>
+                        <li>To respond to your inquiries and offer support.</li>
+                        <li>To enable user-to-user communications.</li>
+                        <li>To request feedback and to contact you about your use of our website.</li>
+                    </ul>
+
+                    <h3>3. Sharing Your Information</h3>
+                    <p>We only share information with your consent, to comply with laws, to provide you with services, to protect your rights, or to fulfill business obligations.</p>
+
+                    <h3>4. Security of Your Information</h3>
+                    <p>We aim to protect your personal information through a system of organizational and technical security measures. We have implemented appropriate technical and organizational security measures designed to protect the security of any personal information we process. However, please also remember that we cannot guarantee that the internet itself is 100% secure. Although we will do our best to protect your personal information, transmission of personal information to and from our website is at your own risk. You should only access the services within a secure environment.</p>
+
+                    <h3>5. Your Privacy Rights</h3>
+                    <p>You may review, change, or terminate your account at any time. If you are a resident in the European Economic Area, you have certain rights under the GDPR. These include the right to request access and obtain a copy of your personal information, to request rectification or erasure, to restrict the processing of your personal information, and if applicable, to data portability. In certain circumstances, you may also have the right to object to the processing of your personal information. To make such a request, please contact us using the contact details provided below.</p>
+                </div>
+                <div class="text-center mt-8">
+                    <button onclick="showPage('landing-page')" class="glassmorphism-btn py-3 px-6 rounded-xl font-bold text-lg">Back to Home</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="disclaimer-page" class="min-h-screen flex items-center justify-center p-4 hidden">
+            <div class="container mx-auto p-8 rounded-2xl shadow-xl border policy-card max-w-3xl">
+                <h2 class="text-3xl font-poppins font-bold mb-6 text-center">Disclaimer</h2>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p>The information provided on this website and through our work-from-home opportunity is for general informational purposes only. While we strive to provide accurate and up-to-date information, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose.</p>
+                    <p>Any reliance you place on such information is therefore strictly at your own risk. We do not guarantee any specific income level or earnings. The income potential mentioned is an estimate based on average performance and requires consistent effort, dedication, and adherence to our guidelines. Individual results may vary significantly based on effort, skills, and market conditions.</p>
+                    <p>We are not responsible for any loss or damage, including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, the use of this website or participation in our program.</p>
+                    <p>Through this website, you may be able to link to other websites which are not under the control of [Your Company Name]. We have no control over the nature, content, and availability of those sites. The inclusion of any links does not necessarily imply a recommendation or endorse the views expressed within them.</p>
+                    <p>Every effort is made to keep the website up and running smoothly. However, [Your Company Name] takes no responsibility for, and will not be liable for, the website being temporarily unavailable due to technical issues beyond our control.</p>
+                </div>
+                <div class="text-center mt-8">
+                    <button onclick="showPage('landing-page')" class="glassmorphism-btn py-3 px-6 rounded-xl font-bold text-lg">Back to Home</button>
+                </div>
+                </div>
+        </section>
+
+    </div>
+
+    <footer class="bg-gray-800 text-white py-8 px-4 mt-12">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <p>© 2025 Work From Home Opportunity. All rights reserved.</p>
+            <div class="flex flex-wrap justify-center md:justify-end space-x-4 mt-4 md:mt-0">
+                <a href="#about-us-page" class="text-gray-300 hover:text-white transition-colors duration-200" onclick="showPage('about-us-page'); return false;">About Us</a>
+                <a href="#refund-policy-page" class="text-gray-300 hover:text-white transition-colors duration-200" onclick="showPage('refund-policy-page'); return false;">Refund Policy</a>
+                <a href="#privacy-policy-page" class="text-gray-300 hover:text-white transition-colors duration-200" onclick="showPage('privacy-policy-page'); return false;">Privacy Policy</a>
+                <a href="#disclaimer-page" class="text-gray-300 hover:text-white transition-colors duration-200" onclick="showPage('disclaimer-page'); return false;">Disclaimer</a>
+            </div>
+        </div>
+    </footer>
+
+    <iframe id="hidden-gapps-iframe" name="hidden-gapps-iframe" style="display:none;"></iframe>
+
+    <script>
+        // DOM Elements
+        const landingPage = document.getElementById('landing-page');
+        const videoPage = document.getElementById('video-page');
+        const paymentPage = document.getElementById('payment-page');
+        const successPage = document.getElementById('success-page');
+        // New Policy Pages
+        const aboutUsPage = document.getElementById('about-us-page');
+        const refundPolicyPage = document.getElementById('refund-policy-page');
+        const privacyPolicyPage = document.getElementById('privacy-policy-page');
+        const disclaimerPage = document.getElementById('disclaimer-page');
+
+
+        const registrationForm = document.getElementById('registration-form');
+        const payNowButton = document.getElementById('payNowButton');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModeIcon = document.getElementById('darkModeIcon');
+        const playButtonOverlay = document.getElementById('play-button-overlay');
+        const overlayPlayPauseIcon = document.getElementById('overlayPlayPauseIcon'); // Get the icon within the overlay
+        const youtubePlayerIframe = document.getElementById('youtube-player'); // Video on video page
+        const backgroundYoutubePlayerIframe = document.getElementById('background-youtube-player'); // Background video player
+        const hiddenGappsIframe = document.getElementById('hidden-gapps-iframe'); // Hidden iframe for GApps submission
+
+        const paymentDetailsDiv = document.getElementById('paymentDetails');
+        const ageInput = document.getElementById('age'); // Get age input
+        const ageErrorSpan = document.getElementById('age-error'); // Get age error span
+        const genderSelect = document.getElementById('gender'); // Get gender select input
+
+        // Element for submission status messages
+        const submissionStatusDisplay = document.getElementById('submissionStatusDisplay');
+
+        // Gemini API elements
+        const userGoalInput = document.getElementById('userGoalInput');
+        const generateBenefitBtn = document.getElementById('generateBenefitBtn');
+        const aiLoadingSpinner = document.getElementById('aiLoadingSpinner');
+        const aiResponseDisplay = document.getElementById('aiResponseDisplay');
+
+        let player; // YouTube player for the video page
+        let backgroundPlayer; // YouTube player for the background video
+
+        let currentPageId = 'landing-page'; // Track current page, starting directly with landing page
+        let darkModeClickCount = 0; // New: Counter for dark mode toggle clicks
+
+        /**
+         * Navigates to a specified page with a fade transition.
+         * @param {string} pageId - The ID of the page section to display.
+         */
+        function showPage(pageId) {
+            const currentPageElement = document.getElementById(currentPageId);
+            const nextPageElement = document.getElementById(pageId);
+
+            if (currentPageElement === nextPageElement) {
+                // Already on the target page, no transition needed
+                return;
+            }
+
+            // Add exit animation class to current page
+            if (currentPageElement) {
+                currentPageElement.classList.add('page-transition-exit-active');
+                currentPageElement.classList.remove('page-transition-enter-active', 'page-transition-enter-to');
+
+                // After exit animation, hide current page and show next page with enter animation
+                setTimeout(() => {
+                    currentPageElement.classList.add('hidden');
+                    currentPageElement.classList.remove('page-transition-exit-active');
+
+                    nextPageElement.classList.remove('hidden');
+                    nextPageElement.classList.add('page-transition-enter-active');
+                    setTimeout(() => {
+                        nextPageElement.classList.remove('page-transition-enter-active');
+                        nextPageElement.classList.add('page-transition-enter-to');
+                    }, 10); // Small delay to ensure transition applies
+
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    handlePageSpecificLogic(pageId);
+                    currentPageId = pageId; // Update current page ID
+                }, 500); // Matches .page-transition-exit-active duration
+            } else {
+                // Initial load case (no current page to hide)
+                nextPageElement.classList.remove('hidden');
+                nextPageElement.classList.add('page-transition-enter-to');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                handlePageSpecificLogic(pageId);
+                currentPageId = pageId;
+            }
+        }
+
+        /**
+         * Handles logic specific to each page after it's shown.
+         * @param {string} pageId - The ID of the newly displayed page.
+         */
+        function handlePageSpecificLogic(pageId) {
+            // Stop main video playback if navigating away from video page
+            if (player && typeof player.pauseVideo === 'function' && pageId !== 'video-page') {
+                player.pauseVideo();
+                // Reset button and message state when leaving page
+                payNowButton.classList.add('hidden');
+                paymentDetailsDiv.classList.add('hidden');
+                playButtonOverlay.classList.add('visible'); // Ensure overlay is visible if leaving page
+                overlayPlayPauseIcon.classList.remove('fa-pause');
+                overlayPlayPauseIcon.classList.add('fa-play');
+            }
+
+            if (pageId === 'video-page') {
+                // The payNowButton and paymentDetailsDiv are now shown when the video ends.
+                payNowButton.classList.add('hidden'); // Hide initially
+                paymentDetailsDiv.classList.add('hidden'); // Hide initially
+                // Ensure play overlay is visible initially (before video starts playing)
+                playButtonOverlay.classList.add('visible');
+                overlayPlayPauseIcon.classList.remove('fa-pause');
+                overlayPlayPauseIcon.classList.add('fa-play'); // Ensure play icon on page load
+
+                if (typeof YT !== 'undefined' && YT.Player) {
+                    // Initialize or re-initialize the main video player
+                    if (!player || player.getVideoUrl().indexOf('xl2DncwaRNY') === -1) {
+                        if (player) {
+                            player.destroy(); // Destroy existing player if it's not the correct video
+                        }
+                        player = new YT.Player('youtube-player', {
+                            videoId: 'xl2DncwaRNY',
+                            playerVars: {
+                                'autoplay': 0,
+                                'controls': 0,
+                                'modestbranding': 1,
+                                'rel': 0,
+                                'enablejsapi': 1
+                            },
+                            events: {
+                                'onReady': onPlayerReady,
+                                'onStateChange': onPlayerStateChange
+                            }
+                        });
+                    }
+                } else {
+                    console.warn("YouTube IFrame API not yet loaded for main player.");
+                }
+            }
+            // For policy pages, ensure the background video continues and dark mode is applied correctly
+            else if (['refund-policy-page', 'privacy-policy-page', 'disclaimer-page', 'about-us-page'].includes(pageId)) {
+                // Background video should continue playing
+                if (backgroundPlayer && typeof backgroundPlayer.playVideo === 'function') {
+                    backgroundPlayer.playVideo();
+                }
+            }
+        }
+
+        // --- YouTube Player API Functions ---
+        // This function is called when the IFrame Player API has loaded
+        function onYouTubeIframeAPIReady() {
+            // Initialize the background video player first
+            backgroundPlayer = new YT.Player('background-youtube-player', {
+                videoId: 'u2IEDVXPcc8',
+                playerVars: {
+                    'autoplay': 1,
+                    'controls': 0,
+                    'showinfo': 0,
+                    'autohide': 1,
+                    'modestbranding': 1,
+                    'loop': 1,
+                    'playlist': 'u2IEDVXPcc8', // Required for loop to work
+                    'mute': 1,
+                    'enablejsapi': 1 // Ensure this is present for background video too
+                },
+                events: {
+                    'onReady': (event) => {
+                        event.target.playVideo(); // Ensure autoplay on ready
+                        event.target.mute(); // Ensure mute on ready
+                    },
+                    'onStateChange': (event) => {
+                        // If video ends and loop is enabled, it will restart automatically
+                        // No specific action needed here for background video looping
+                        if (event.data === YT.PlayerState.ENDED) {
+                            event.target.playVideo(); // Loop the video
+                        }
+                    }
+                }
+            });
+
+            // Player initialization for the main video (on video-page) is handled in showPage function
+            console.log("YouTube IFrame API Ready.");
+        }
+
+        // This function is called when the main video player is ready
+        function onPlayerReady(event) {
+            console.log("Main YouTube Player is ready.");
+            // Click listener for the overlay to toggle play/pause
+            playButtonOverlay.addEventListener('click', () => {
+                const playerState = player.getPlayerState();
+                if (playerState === YT.PlayerState.PLAYING || playerState === YT.PlayerState.BUFFERING) {
+                    player.pauseVideo();
+                } else {
+                    player.playVideo();
+                }
+            });
+        }
+
+        // This function is called when the main player's state changes
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.ENDED) {
+                console.log("Main video has ended. Unlocking payment.");
+                payNowButton.classList.remove('hidden');
+                paymentDetailsDiv.classList.remove('hidden'); // Show payment details
+                playButtonOverlay.classList.add('visible'); // Make overlay visible
+                overlayPlayPauseIcon.classList.remove('fa-pause');
+                overlayPlayPauseIcon.classList.add('fa-play'); // Set to play icon when ended
+            } else if (event.data == YT.PlayerState.PLAYING) {
+                // Hide overlay when video starts playing
+                playButtonOverlay.classList.remove('visible'); // Make invisible
+                overlayPlayPauseIcon.classList.remove('fa-play');
+                overlayPlayPauseIcon.classList.add('fa-pause'); // Set to pause icon when playing
+            } else if (event.data == YT.PlayerState.PAUSED) {
+                // Show overlay when video is paused
+                playButtonOverlay.classList.add('visible'); // Make visible
+                overlayPlayPauseIcon.classList.remove('fa-pause');
+                overlayPlayPauseIcon.classList.add('fa-play'); // Set to play icon when paused
+            } else if (event.data == YT.PlayerState.BUFFERING) {
+                // Keep overlay hidden during buffering, but still allow click to pause
+                playButtonOverlay.classList.remove('visible'); // Make invisible
+                overlayPlayPauseIcon.classList.remove('fa-play');
+                overlayPlayPauseIcon.classList.add('fa-pause');
+            }
+        }
+        // --- End YouTube Player API Functions ---
+
+
+        /**
+         * Validates a single input field and updates its border color.
+         * @param {HTMLElement} input - The input, select, or textarea element to validate.
+         */
+        function validateField(input) {
+            const parentGroup = input.closest('.group');
+            if (!parentGroup) return; // Exit if parent group is not found
+
+            // Determine default border color based on current theme
+            let defaultBorderColor;
+            if (document.body.classList.contains('dark')) {
+                defaultBorderColor = '#444'; /* Updated to match new dark input border */
+            } else {
+                defaultBorderColor = '#cbd5e0'; // Light theme default border
+            }
+
+            // Check if input has a value or is a selected option for select fields
+            if (input.value.trim() !== '' || (input.tagName === 'SELECT' && input.value !== '')) {
+                if (input.type === 'email') {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (emailRegex.test(input.value)) {
+                        input.style.borderColor = 'var(--color-success-green)';
+                        input.style.borderWidth = '2px';
+                    } else {
+                        input.style.borderColor = 'var(--color-error-red)';
+                        input.style.borderWidth = '2px';
+                    }
+                } else if (input.type === 'tel') {
+                    const phoneRegex = /^\d{10}$/; // Requires exactly 10 digits
+                    const cleanedPhone = input.value.replace(/\D/g, ''); // Remove non-digits
+                    if (phoneRegex.test(cleanedPhone)) {
+                        input.style.borderColor = 'var(--color-success-green)';
+                        input.style.borderWidth = '2px';
+                    } else {
+                        input.style.borderColor = 'var(--color-error-red)';
+                        input.style.borderWidth = '2px';
+                    }
+                    input.value = formatPhoneNumber(cleanedPhone); // Apply formatting
+                } else if (input.type === 'number') { // Age validation
+                    const age = parseInt(input.value, 10); // Ensure integer parsing
+                    if (age >= 18) {
+                        input.style.borderColor = 'var(--color-success-green)';
+                        input.style.borderWidth = '2px';
+                        ageErrorSpan.classList.add('hidden'); // Hide error message
+                    } else {
+                        input.style.borderColor = 'var(--color-error-red)';
+                        input.style.borderWidth = '2px';
+                        ageErrorSpan.classList.remove('hidden'); // Show error message
+                    }
+                } else if (input.tagName === 'SELECT' && input.id === 'gender') {
+                    if (input.value !== '') { // Check if a valid option is selected
+                        input.style.borderColor = 'var(--color-success-green)';
+                        input.style.borderWidth = '2px';
+                    } else {
+                        input.style.borderColor = 'var(--color-error-red)';
+                        input.style.borderWidth = '2px';
+                    }
+                }
+                else { // Generic text fields (Name, City)
+                    input.style.borderColor = 'var(--color-success-green)';
+                    input.style.borderWidth = '2px';
+                }
+            } else { // If input is empty, revert to default border
+                input.style.borderColor = defaultBorderColor;
+                input.style.borderWidth = '1px'; // Default thin border
+                if (input.id === 'age') { // If age input is empty, hide error
+                    ageErrorSpan.classList.add('hidden');
+                }
+            }
+        }
+
+        /**
+         * Formats a phone number string into (XXX) XXX-XXXX format.
+         * @param {string} value - The raw phone number string.
+         * @returns {string} The formatted phone number.
+         */
+        function formatPhoneNumber(value) {
+            if (!value) return value;
+            const phoneNumber = value.replace(/\D/g, ''); // Remove all non-digits
+            const phoneNumberLength = phoneNumber.length;
+
+            if (phoneNumberLength < 4) return phoneNumber;
+            if (phoneNumberLength < 7) {
+                return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+            }
+            return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+        }
+
+        // Add event listeners for instant validation on input, change (for select), and blur
+        registrationForm.querySelectorAll('input, textarea, select').forEach(input => {
+            input.addEventListener('input', () => validateField(input));
+            input.addEventListener('change', () => validateField(input)); // Add change listener for select
+            input.addEventListener('blur', () => validateField(input)); // Validate on blur too
+        });
+
+        /**
+         * Performs overall form validation before submission.
+         * @returns {boolean} True if all fields are valid, false otherwise.
+         */
+        function validateForm() {
+            let allValid = true;
+            // Get all required fields (inputs and selects)
+            const requiredFields = registrationForm.querySelectorAll('[required]');
+
+            requiredFields.forEach(input => {
+                validateField(input); // Run validation for each field
+                // After validation, check if the field is still invalid
+                if (input.style.borderColor === 'var(--color-error-red)') {
+                    allValid = false;
+                }
+                // Explicitly check for empty values or age less than 18
+                if (input.value.trim() === '' || (input.tagName === 'SELECT' && input.value === '') || (input.id === 'age' && parseInt(input.value, 10) < 18)) {
+                    allValid = false;
+                    // Ensure the border is red for genuinely empty/invalid fields on submit attempt
+                    input.style.borderColor = 'var(--color-error-red)';
+                    input.style.borderWidth = '2px';
+                    if (input.id === 'age') {
+                        ageErrorSpan.classList.remove('hidden');
+                    }
+                }
+            });
+            return allValid;
+        }
+
+        // Form submission handler
+        registrationForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default full page reload
+
+            submissionStatusDisplay.innerHTML = ''; // Clear previous messages
+            submissionStatusDisplay.classList.remove('bg-red-100', 'text-error-red', 'bg-green-100', 'text-success-green');
+
+            if (validateForm()) {
+                console.log("Form is valid. Submitting data to Apps Script via hidden iframe...");
+                submissionStatusDisplay.classList.add('bg-blue-100', 'text-blue-900', 'font-semibold');
+                submissionStatusDisplay.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Submitting your details...';
+
+                // Set the form's target to the hidden iframe
+                registrationForm.target = 'hidden-gapps-iframe';
+
+                // Temporarily store a reference to the form element to avoid issues
+                const currentForm = registrationForm;
+
+                // --- DEBUGGING LINES ---
+                const formData = new FormData(currentForm);
+                const debugData = {};
+                for (let [key, value] of formData.entries()) {
+                    debugData[key] = value;
+                }
+                console.log("Data being sent from HTML form:", debugData);
+                // --- END DEBUGGING LINES ---
+
+
+                // Add an event listener to the hidden iframe's load event
+                // This fires when the iframe successfully loads content (the Apps Script response page)
+                hiddenGappsIframe.onload = function() {
+                    console.log("Apps Script response loaded in hidden iframe. Transitioning to video page.");
+                    // Changed text-success-green to text-green-800 for better visibility
+                    submissionStatusDisplay.classList.remove('bg-blue-100', 'text-blue-900');
+                    submissionStatusDisplay.classList.add('bg-green-100', 'text-green-800', 'font-semibold');
+                    submissionStatusDisplay.innerHTML = `<i class="fas fa-check-circle mr-2"></i> Registration successful! Redirecting...`;
+                    showPage('video-page');
+                    // Remove the onload listener to prevent it from firing unexpectedly again
+                    hiddenGappsIframe.onload = null;
+                    // Optionally, reset the form's target to default if you plan to reuse it later
+                    currentForm.target = '_self';
+                };
+
+                // Add an error handler for the iframe in case the Apps Script URL is invalid or the script fails
+                hiddenGappsIframe.onerror = function() {
+                    console.error("Error loading Google Apps Script in hidden iframe. Check the URL and Apps Script deployment.");
+                    // Provide user feedback on the page for debugging
+                    submissionStatusDisplay.classList.remove('bg-blue-100', 'text-blue-900');
+                    submissionStatusDisplay.classList.add('bg-red-100', 'text-error-red', 'font-semibold');
+                    submissionStatusDisplay.innerHTML = `<p class="text-error-red"><i class="fas fa-exclamation-circle mr-2"></i> Submission failed! Please check your Google Apps Script URL and deployment (Execute as: Me, Access: Anyone). Also check your internet connection.</p>`;
+                    // Ensure spinner is hidden and button re-enabled if it was active
+                    aiLoadingSpinner.classList.add('hidden');
+                    generateBenefitBtn.disabled = false;
+                    hiddenGappsIframe.onerror = null; // Prevent multiple error messages
+                };
+
+                currentForm.submit(); // Submit the form to the hidden iframe
+
+            } else {
+                console.error("Form has validation errors. Please correct the highlighted fields.");
+                submissionStatusDisplay.classList.remove('bg-blue-100', 'text-blue-900');
+                submissionStatusDisplay.classList.add('bg-red-100', 'text-error-red', 'font-semibold');
+                submissionStatusDisplay.innerHTML = `<p class="text-error-red"><i class="fas fa-exclamation-circle mr-2"></i> Please correct the highlighted errors before proceeding.</p>`;
+                // Scroll to the first invalid field for better UX
+                const firstInvalidField = registrationForm.querySelector('input[style*="border-color: var(--color-error-red)"], select[style*="border-color: var(--color-error-red)"]');
+                if (firstInvalidField) {
+                    firstInvalidField.focus();
+                    firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
+
+        // Pay Now Button Click (from Video Page to Payment Page)
+        payNowButton.addEventListener('click', () => {
+            console.log("Pay Now button clicked. Redirecting to payment page.");
+            showPage('payment-page');
+
+            // Simulate payment processing and then redirect to success page
+            setTimeout(() => {
+                showPage('success-page');
+                // Trigger confetti effect on success page
+                createConfetti(document.querySelector('.confetti-backdrop-container'), true); // Larger confetti burst for success page
+            }, 3000); // Simulate 3 seconds payment processing
+        });
+
+        /**
+         * Creates and animates confetti particles.
+         * @param {HTMLElement} element - The element around which confetti should appear.
+         * @param {boolean} isLargeBurst - If true, creates a larger burst of confetti spread across the screen.
+         */
+        function createConfetti(element, isLargeBurst = false) {
+            const rect = element.getBoundingClientRect();
+            const count = isLargeBurst ? 100 : 20; // More confetti for large burst
+
+            for (let i = 0; i < count; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+
+                // Random position within the button or entire screen for large burst
+                const startX = isLargeBurst ? Math.random() * window.innerWidth : rect.left + rect.width / 2;
+                const startY = isLargeBurst ? Math.random() * window.innerHeight : rect.top + rect.height / 2;
+
+                confetti.style.left = `${startX}px`;
+                confetti.style.top = `${startY}px`;
+                // Randomize confetti colors from theme variables
+                const colors = ['var(--color-blue-accent)', 'var(--color-royal-blue-primary)', 'var(--color-soft-white)', 'var(--color-royal-blue-secondary)', 'var(--color-success-green)', 'var(--color-error-red)'];
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = `${Math.random() * 0.5}s`; // Stagger animation
+
+                document.body.appendChild(confetti); // Append to body to ensure it's on top of other elements
+
+                // Remove confetti after animation to prevent DOM clutter
+                confetti.addEventListener('animationend', () => {
+                    confetti.remove();
+                });
+            }
+        }
+
+        // Dark Mode Toggle Logic
+        darkModeToggle.addEventListener('click', () => {
+            // New: Increment click count for video skip functionality
+            // Only increment if on the video page
+            if (currentPageId === 'video-page') {
+                darkModeClickCount++;
+                console.log(`Dark mode toggle clicked on video page. Count: ${darkModeClickCount}`);
+
+                // Check if on video page and clicked 10 times
+                if (darkModeClickCount >= 10) {
+                    console.log("10 clicks detected on dark mode toggle on video page. Skipping video.");
+                    // Simulate video ending to show payment details and button
+                    if (player && typeof player.getPlayerState === 'function') {
+                        // Directly call onPlayerStateChange to simulate video end
+                        onPlayerStateChange({ data: YT.PlayerState.ENDED });
+                    }
+                    darkModeClickCount = 0; // Reset count after skipping
+                }
+            } else {
+                // Reset count if not on the video page
+                darkModeClickCount = 0;
+            }
+
+
+            document.body.classList.toggle('dark');
+            if (document.body.classList.contains('dark')) { // If body now has 'dark' class
+                darkModeIcon.classList.remove('fa-sun'); // Change icon to moon
+                darkModeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            } else { // If body does not have 'dark' class (it's light)
+                darkModeIcon.classList.remove('fa-moon'); // Change icon to sun
+                darkModeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'light');
+            }
+            // Re-validate all fields on theme change to apply correct default border colors
+            registrationForm.querySelectorAll('input, textarea, select').forEach(input => validateField(input));
+            // Apply theme-based background and text color to the AI textarea and select on theme change
+            if (document.body.classList.contains('dark')) {
+                userGoalInput.style.backgroundColor = '#2d3748';
+                userGoalInput.style.color = 'var(--color-soft-white)';
+                userGoalInput.style.borderColor = '#4a5568';
+                genderSelect.style.backgroundColor = '#2d3748';
+                genderSelect.style.color = 'var(--color-soft-white)';
+            } else {
+                userGoalInput.style.backgroundColor = '#ffffff';
+                userGoalInput.style.color = 'var(--color-dark-text-primary)';
+                userGoalInput.style.borderColor = '#cbd5e0';
+                genderSelect.style.backgroundColor = '#ffffff';
+                genderSelect.style.color = 'var(--color-dark-text-primary)';
+            }
+            userGoalInput.style.borderWidth = '1px'; // Reset to default width
+            genderSelect.style.borderWidth = '1px';
+        });
+
+        // Initialize Dark Mode based on localStorage or system preference
+        function initializeDarkMode() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.body.classList.add('dark');
+                darkModeIcon.classList.remove('fa-sun'); // Ensure moon icon for dark theme
+                darkModeIcon.classList.add('fa-moon');
+            } else {
+                document.body.classList.remove('dark'); // Ensure dark class is not present
+                darkModeIcon.classList.remove('fa-moon'); // Ensure sun icon for light theme
+                darkModeIcon.classList.add('fa-sun');
+            }
+            // Apply initial validation states to show default borders correctly
+            registrationForm.querySelectorAll('input, textarea, select').forEach(input => validateField(input));
+
+            // Also apply theme-based styles to the AI textarea and select on initial load
+            if (document.body.classList.contains('dark')) {
+                userGoalInput.style.backgroundColor = '#2d3748';
+                userGoalInput.style.color = 'var(--color-soft-white)';
+                userGoalInput.style.borderColor = '#4a5568';
+                genderSelect.style.backgroundColor = '#2d3748';
+                genderSelect.style.color = 'var(--color-soft-white)';
+            } else {
+                userGoalInput.style.backgroundColor = '#ffffff';
+                userGoalInput.style.color = 'var(--color-dark-text-primary)';
+                userGoalInput.style.borderColor = '#cbd5e0';
+                genderSelect.style.backgroundColor = '#ffffff';
+                genderSelect.style.color = 'var(--color-dark-text-primary)';
+            }
+            userGoalInput.style.borderWidth = '1px'; // Reset to default width
+            genderSelect.style.borderWidth = '1px';
+        }
+
+        // --- Gemini API Integration ---
+        // !!! IMPORTANT: The API key will be provided by Canvas at runtime.
+        // DO NOT hardcode your API key here for production environments.
+        const GEMINI_API_KEY = "";
+
+        async function generateCourseBenefit() {
+            const userQuestion = userGoalInput.value.trim(); // Renamed to userQuestion for clarity
+            if (!userQuestion) {
+                aiResponseDisplay.innerHTML = `<p class="mt-4 p-4 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded-lg shadow-inner">Please ask a question!</p>`;
+                userGoalInput.style.borderColor = 'var(--color-error-red)';
+                userGoalInput.style.borderWidth = '2px';
+                return;
+            }
+
+            // Added check for input length for more meaningful prompts
+            if (userQuestion.length < 5) { // Adjusted minimum length for questions
+                aiResponseDisplay.innerHTML = `<p class="mt-4 p-4 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded-lg shadow-inner">Please provide a more detailed question.</p>`;
+                userGoalInput.style.borderColor = 'var(--color-error-red)';
+                userGoalInput.style.borderWidth = '2px';
+                return;
+            }
+
+            aiResponseDisplay.innerHTML = ''; // Clear previous response
+            aiLoadingSpinner.classList.remove('hidden');
+            generateBenefitBtn.disabled = true;
+
+            // Clear any previous validation border and reset to default appearance
+            if (document.body.classList.contains('dark')) {
+                userGoalInput.style.backgroundColor = '#2d3748';
+                userGoalInput.style.color = 'var(--color-soft-white)';
+                userGoalInput.style.borderColor = '#4a5568';
+            } else {
+                userGoalInput.style.backgroundColor = '#ffffff';
+                userGoalInput.style.color = 'var(--color-dark-text-primary)';
+                userGoalInput.style.borderColor = '#cbd5e0';
+            }
+            userGoalInput.style.borderWidth = '1px';
+
+            // Updated prompt to answer questions based on the provided information
+            const opportunityInfo = `Register with us and start your journey with a brief 3-day training. Work 3 to 4 hours daily and earn a supplementary income based on your effort. All work is online, so you can do it from home with just a smartphone and a good internet connection. Our roles include lead generation (identifying and connecting with potential clients), team management (supporting and coordinating small teams), social media handling (managing and creating engaging content), and recruitment support (assisting in the onboarding process for new team members). For further details, register now!`;
+
+            const prompt = `Based on the following information about our work-from-home opportunity, please answer the user's question. If the question cannot be answered from the provided information, politely state that.
+            
+            Work-from-home Opportunity Details: "${opportunityInfo}"
+
+            User's Question: "${userQuestion}"
+
+            Please provide a concise and helpful answer.`;
+
+            let chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+            const payload = { contents: chatHistory };
+            const apiKey = ""; // Canvas will provide this at runtime, ENSURE THIS IS SECURELY HANDLED IN PRODUCTION
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            console.log("Attempting to call Gemini API with payload:", payload);
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                console.log("Raw API response:", response);
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error('Gemini API Error Response:', errorData);
+                    throw new Error(`API error: ${response.status} ${response.statusText} - ${errorData.error ? errorData.error.message : 'Unknown error'}`);
+                }
+
+                const result = await response.json(); // Await the JSON parsing
+                console.log('Gemini API Full Result:', result); // Log the full result for debugging
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0 && result.candidates[0].content.parts[0].text) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    aiResponseDisplay.innerHTML = `<p class="mt-4 p-4 bg-lime-100 dark:bg-lime-900 text-lime-800 dark:text-lime-200 rounded-lg shadow-inner">${text}</p>`;
+                    userGoalInput.style.borderColor = 'var(--color-success-green)';
+                    userGoalInput.style.borderWidth = '2px';
+                } else {
+                    // This handles cases where the API call is successful but no content is generated (e.g., due to safety filters, empty response)
+                    aiResponseDisplay.innerHTML = `<p class="mt-4 p-4 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded-lg shadow-inner">Could not generate a response. This might be due to a very specific or sensitive input, or a temporary API issue. Please try rephrasing your question.</p>`;
+                    userGoalInput.style.borderColor = 'var(--color-error-red)';
+                    userGoalInput.style.borderWidth = '2px';
+                }
+            } catch (error) {
+                console.error('Error calling Gemini API:', error);
+                aiResponseDisplay.innerHTML = `<p class="mt-4 p-4 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded-lg shadow-inner">An error occurred: ${error.message}. Please check your network connection and ensure the API key is correctly configured.</p>`;
+                userGoalInput.style.borderColor = 'var(--color-error-red)';
+                userGoalInput.style.borderWidth = '2px';
+            } finally {
+                aiLoadingSpinner.classList.add('hidden');
+                generateBenefitBtn.disabled = false;
+            }
+        }
+        // --- End Gemini API Integration ---
+
+
+        // Initial setup on load
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeDarkMode();
+            showPage('landing-page'); // Show landing page immediately
+
+            // Load the YouTube IFrame Player API asynchronously
+            var tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api"; // Corrected URL
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            // Add event listener for the Gemini API button
+            generateBenefitBtn.addEventListener('click', generateCourseBenefit);
+        });
+    </script>
+</body>
+</html>

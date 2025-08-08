@@ -162,6 +162,15 @@
         .landing-subheading {
             color: #F0F0F0;
         }
+        /* NEW: Styles for the pricing box on the landing page */
+        .landing-pricing-card {
+            background-color: var(--color-dark-bg-secondary);
+            border: 1px solid #4a5568;
+        }
+        body:not(.dark) .landing-pricing-card {
+            background-color: var(--color-light-bg-secondary);
+            border: 1px solid #e2e8f0;
+        }
 
         /* Floating label styles */
         .relative.group input,
@@ -492,34 +501,18 @@
             <div class="container mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20 relative z-10">
                 <div class="text-center lg:text-left lg:w-1/2">
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-poppins font-bold leading-tight landing-heading mb-6">
-                        🏠 Work From Home & Unlock Your Earning Potential
+                        🏠 3-Day Training Program: Your Path to a Supplementary Income
                     </h1>
-                    <p class="text-lg sm:text-xl landing-subheading mb-6 max-w-lg mx-auto lg:mx-0">
-                        Join our platform to earn a supplementary income by working just 3-4 hours a day. No experience needed—all you need is a smartphone and an internet connection.
+                    <p class="text-lg sm:text-xl landing-subheading mb-4 max-w-lg mx-auto lg:mx-0">
+                        We offer a comprehensive 3-day online training program designed to equip you with the skills needed to start a work-from-home career. No prior experience is necessary, just a smartphone and a good internet connection. This training is perfect for students, homemakers, and anyone looking to build a secondary income stream.
                     </p>
-                    
-                    <!-- NEW: Pricing and Description Box -->
-                    <div class="my-8 p-6 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg max-w-lg mx-auto lg:mx-0">
-                        <h3 class="text-2xl font-bold text-white text-center mb-4">One-Time Registration Fee</h3>
-                        <div class="flex justify-center items-baseline gap-3">
-                            <span class="text-2xl text-gray-400 line-through">₹195</span>
-                            <span class="text-5xl font-bold text-amber-300 animate-pulse">₹49</span>
-                        </div>
-                        <p class="text-center text-green-300 font-semibold mt-2">Special Limited-Time Offer!</p>
-                        <p class="text-gray-300 mt-4 text-center text-base">
-                            This one-time fee unlocks <strong>lifetime access</strong> to our training modules, dedicated support, and exclusive community resources. No hidden charges, no monthly fees.
-                        </p>
-                    </div>
-
-                    <p class="text-sm italic text-gray-300 mt-6 block max-w-lg mx-auto lg:mx-0">*Individual results may vary. Earnings are dependent on effort, skills, and market conditions.</p>
-                    <p class="text-lg sm:text-xl font-semibold landing-subheading mt-4 mb-8 max-w-lg mx-auto lg:mx-0">
-                        👉 Register Now to get started!
+                    <p class="text-sm italic text-gray-300 mt-4 block">
+                        *Individual results may vary. Earnings are dependent on consistent effort, skills, and market conditions.
                     </p>
                 </div>
 
-
                 <div class="w-full lg:w-1/2 rounded-3xl shadow-xl border p-8 sm:p-10 registration-card">
-                    <h2 class="text-2xl font-poppins font-semibold text-center mb-8">Register Today!</h2>
+                    <h2 class="text-2xl font-poppins font-semibold text-center mb-8">Register for the Training!</h2>
 
                     <form id="registration-form" action="https://script.google.com/macros/s/AKfycbz01zTSVv9528tk3YcYrlecPL6jY0Qff63Xj7zzwDzDbrWTfQ40sNX3dWXs4YvwKgMf/exec" method="post" class="space-y-6">
                         <div class="relative group">
@@ -567,7 +560,7 @@
 
                         <button type="submit"
                             class="w-full py-3 mt-4 rounded-xl font-bold text-lg gradient-button shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-accent transition duration-300">
-                            Get Started <i class="fas fa-arrow-right ml-2"></i>
+                            Register for Training <i class="fas fa-arrow-right ml-2"></i>
                         </button>
                     </form>
                 </div>
@@ -594,11 +587,11 @@
                 <div class="lg:w-1/3 w-full p-8 rounded-2xl shadow-xl flex flex-col justify-between info-card">
                     <div>
                         <h2 class="text-3xl font-poppins font-bold mb-6">
-                            Unlock Your Job Opportunity!
+                            Secure Your Training Spot!
                         </h2>
                         <div id="paymentDetails" class="hidden">
                             <p class="text-lg mb-4 leading-relaxed">
-                                Congratulations! You've completed the introductory session. You now have access to the next steps for your work-from-home opportunity.
+                                Congratulations! You've completed the introductory session. You can now enroll in our 3-day training program.
                             </p>
                             <div class="price-display-box">
                                 <span style="font-size: 1rem; color: #444;">Your one-time registration fee: </span>
@@ -611,7 +604,7 @@
                             </p>
 
                             <div class="space-y-4 mb-10">
-                                <h3 class="text-xl font-poppins font-semibold mb-4">✅ You Now Have Access To:</h3>
+                                <h3 class="text-xl font-poppins font-semibold mb-4">✅ Your Training Enrollment Includes:</h3>
                                 <div class="flex items-center">
                                     <i class="fas fa-book text-blue-accent text-2xl mr-4"></i>
                                     <span class="text-lg">Comprehensive Training & Resources</span>
@@ -624,20 +617,19 @@
                                     <i class="fab fa-whatsapp text-success-green text-2xl mr-4"></i>
                                     <span class="text-lg">Exclusive Community Access</span>
                                 </div>
-                                <!-- New items added here -->
                                 <div class="flex items-center">
                                     <i class="fas fa-briefcase text-blue-accent text-2xl mr-4"></i>
-                                    <span class="text-lg">Direct Access to Work Opportunities</span>
+                                    <span class="text-lg">Guidance for Work Opportunities</span>
                                 </div>
                                 <div class="flex items-center">
                                     <i class="fas fa-chart-line text-blue-accent text-2xl mr-4"></i>
-                                    <span class="text-lg">Performance Tracking & Growth Tools</span>
+                                    <span class="text-lg">Skill Tracking & Growth Tools</span>
                                 </div>
                             </div>
 
                             <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
                                 <h3 class="text-xl font-poppins font-semibold mb-4">
-                                    💫 Want to see how this fits your goals? Ask away!
+                                    💫 Have a question? Ask away!
                                 </h3>
                                 <div class="relative group mb-4">
                                     <textarea id="userGoalInput"
@@ -662,7 +654,7 @@
                     <div class="sticky-cta-wrapper lg:static mt-auto lg:mt-0" id="payment-cta-wrapper">
                         <button id="payNowButton"
                             class="glassmorphism-btn w-full py-4 rounded-xl font-bold text-xl uppercase transition duration-300 relative overflow-hidden group">
-                            Start Your Journey <div class="confetti-container"></div>
+                            Enroll Now for ₹49 <div class="confetti-container"></div>
                         </button>
                     </div>
                 </div>
@@ -673,7 +665,7 @@
             <div class="rounded-2xl shadow-xl text-center border p-10 payment-processing-card">
                 <div class="spinner mx-auto mb-6"></div>
                 <h2 class="text-3xl font-poppins font-bold mb-4">
-                    Processing Your Application...
+                    Processing Your Enrollment...
                 </h2>
                 <p class="text-lg">
                     You will be securely redirected to our payment partner (Razorpay / Instamojo / PayPal) in a moment to complete your registration.
@@ -692,7 +684,7 @@
                     You're In! 🎉
                 </h2>
                 <p class="text-xl mb-6">
-                    We've received your ₹49 registration fee. Get ready to start earning!
+                    We've received your ₹49 registration fee. Your training is starting soon!
                 </p>
 
                 <p class="text-lg mb-4">
@@ -710,8 +702,8 @@
                 <h2 class="text-3xl font-poppins font-bold mb-6 text-center">About Us</h2>
                 <div class="prose dark:prose-invert max-w-none">
                     <p>Welcome to our platform, where we believe in empowering individuals to achieve financial independence and professional growth from the comfort of their homes.</p>
-                    <p>We are dedicated to providing accessible and flexible work-from-home opportunities, designed for a diverse audience including students, homemakers, part-timers, and anyone seeking to build a sustainable secondary income stream.</p>
-                    <p>Our mission is to equip you with the necessary tools, training, and support to succeed. We focus on practical skills and a community-driven approach to ensure that every participant can thrive. With our comprehensive resources, dedicated mentorship, and an exclusive community, you're not just finding a job – you're building a future.</p>
+                    <p>We are dedicated to providing accessible and flexible online training programs, designed for a diverse audience including students, homemakers, part-timers, and anyone seeking to build a sustainable secondary income stream.</p>
+                    <p>Our mission is to equip you with the necessary tools, training, and support to succeed. We focus on practical skills and a community-driven approach to ensure that every participant can thrive. With our comprehensive resources, dedicated mentorship, and an exclusive community, you're not just finding a course – you're building a foundation for your future.</p>
                     <p>Join us to unlock your potential, gain valuable experience, and take control of your earning journey. We are committed to fostering an.environment where hard work translates directly into tangible results, helping you earn a supplementary income based on your effort and market conditions.</p>
                     <h3 class="text-xl font-poppins font-semibold mt-6 mb-3">Contact Information:</h3>
                     <p><strong>Name:</strong> Akash Habib</p>
@@ -728,8 +720,8 @@
             <div class="container mx-auto p-8 rounded-2xl shadow-xl border policy-card max-w-3xl">
                 <h2 class="text-3xl font-poppins font-bold mb-6 text-center">Refund Policy</h2>
                 <div class="prose dark:prose-invert max-w-none">
-                    <p>Our refund policy is in line with our digital service delivery model. As our work-from-home opportunity provides immediate access to resources, training, and community upon successful registration, all registration fees are generally non-refundable.</p>
-                    <p>If you encounter technical issues that prevent you from accessing the services, and these issues cannot be resolved by our support team, a refund may be considered on a case-by-case basis.</p>
+                    <p>Our refund policy is in line with our digital service delivery model. As our training program provides immediate access to resources, training, and community upon successful registration, all registration fees are generally non-refundable.</p>
+                    <p>If you encounter technical issues that prevent you from accessing the training services, and these issues cannot be resolved by our support team, a refund may be considered on a case-by-case basis.</p>
                     <p>Any refund requests must be submitted within 7 days of registration and must be accompanied by evidence of the technical issue. We do not offer refunds for changes of mind, lack of participation, or dissatisfaction with earnings potential, as results vary based on individual effort and market conditions.</p>
                     <p>Once the refund is approved, the amount will be credited to original payment method within 5-7 business days.</p>
                     <p>By proceeding with registration, you acknowledge and agree to this refund policy.</p>
@@ -781,7 +773,7 @@
             <div class="container mx-auto p-8 rounded-2xl shadow-xl border policy-card max-w-3xl">
                 <h2 class="text-3xl font-poppins font-bold mb-6 text-center">Disclaimer</h2>
                 <div class="prose dark:prose-invert max-w-none">
-                    <p>The information provided on this website and through our work-from-home opportunity is for general informational purposes only. While we strive to provide accurate and up-to-date information, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose.</p>
+                    <p>The information provided on this website and through our training program is for general informational purposes only. While we strive to provide accurate and up-to-date information, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose.</p>
                     <p>Any reliance you place on such information is therefore strictly at your own risk. We do not guarantee any specific income level or earnings. The income potential mentioned is an estimate based on average performance and requires consistent effort, dedication, and adherence to our guidelines. Individual results may vary significantly based on effort, skills, and market conditions.</p>
                     <p>Through this website, you may be able to link to other websites which are not under the control of Legacy of Achievers. We have no control over the nature, content, and availability of those sites. The inclusion of any links does not necessarily imply a recommendation or endorse the views expressed within them.</p>
                     <p>Every effort is made to keep the website up and running smoothly. However, Legacy of Achievers takes no responsibility for, and will not be liable for, the website being temporarily unavailable due to technical issues beyond our control.</p>
@@ -818,7 +810,7 @@
                     <p>In no event shall Legacy of Achievers or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on this website, even if Legacy of Achievers or a Legacy of Achievers authorized representative has been notified orally or in writing of the possibility of such damage.</p>
 
                     <h3>5. Governing Law</h3>
-                    <p>These terms and conditions are governed by and construed in accordance with the laws of India, specifically the State of Karnataka, and you irrevocably submit to the exclusive jurisdiction of the courts located in Karnataka, India.</p>
+                    <p>These terms and conditions are governed by and construed in accordance with the laws of [Your Jurisdiction] and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.</p>
                 </div>
                 <div class="text-center mt-8">
                     <button onclick="showPage('landing-page')" class="glassmorphism-btn py-3 px-6 rounded-xl font-bold text-lg">Back to Home</button>
@@ -1441,9 +1433,9 @@
             // Updated prompt to answer questions based on the provided information
             const opportunityInfo = `Register with us and start your journey with a brief 3-day training. Work 3 to 4 hours daily and earn a supplementary income based on your effort. All work is online, so you can do it from home with just a smartphone and a good internet connection. Our roles include lead generation (identifying and connecting with potential clients), team management (supporting and coordinating small teams), social media handling (managing and creating engaging content), and recruitment support (assisting in the onboarding process for new team members). For further details, register now!`;
 
-            const prompt = `Based on the following information about our work-from-home opportunity, please answer the user's question. If the question cannot be answered from the provided information, politely state that.
+            const prompt = `Based on the following information about our training program, please answer the user's question. If the question cannot be answered from the provided information, politely state that.
             
-            Work-from-home Opportunity Details: "${opportunityInfo}"
+            Training Program Details: "${opportunityInfo}"
 
             User's Question: "${userQuestion}"
 

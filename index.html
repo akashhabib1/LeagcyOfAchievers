@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Achievers Program</title>
+    <title>Legacy of Achievers</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -45,7 +45,7 @@
             --tw-color-light-placeholder-text: 153 153 153;
         }
 
-        /* Base Body Styling - Defaults to Dark Theme */
+        /* Base Body Styling - Defaults to Light Theme */
         body {
             background-color: var(--color-light-bg-primary);
             color: var(--color-dark-text-primary);
@@ -59,39 +59,57 @@
             color: var(--color-soft-white);
         }
 
-        /* Card Backgrounds */
-        .registration-card,
-        .info-card,
-        .payment-processing-card,
-        .success-card,
+        /* Card Backgrounds - Non-transparent cards */
         .policy-card {
             background-color: var(--color-light-bg-secondary); /* White for light theme cards */
             color: var(--color-dark-text-primary); /* Dark text for light theme cards */
-            border-color: #e2e8f0; /* Light border */
+            border: 1px solid #e2e8f0; /* Light border */
             border-radius: 1.5rem;
+        }
+
+        body.dark .policy-card {
+            background-color: var(--color-dark-bg-secondary);
+            color: var(--color-soft-white);
+            border: 1px solid #4a5568;
+        }
+
+        /* NEW: Glassmorphism effect for the registration card AND info card */
+        .registration-card,
+        .info-card,
+        .success-card,
+        .payment-processing-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            color: #FFFFFF; /* White text for visibility on video */
         }
 
         body.dark .registration-card,
         body.dark .info-card,
-        body.dark .payment-processing-card,
         body.dark .success-card,
-        body.dark .policy-card {
-            background-color: var(--color-dark-bg-secondary);
+        body.dark .payment-processing-card {
+            background: rgba(26, 26, 26, 0.5); /* Dark mode transparency */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--color-soft-white);
-            border-color: #4a5568;
         }
+        
+        /* Ensure headings inside the transparent card are visible */
+        .registration-card h2, .registration-card p,
+        .info-card h2, .info-card p, .info-card h3, .info-card span,
+        .success-card h2, .success-card p,
+        .payment-processing-card h2, .payment-processing-card p {
+             color: inherit; /* Inherit the white color from the card */
+        }
+
 
         /* Text Colors - Ensure general text uses inherited color */
         body p, body span, body label, body h2, body h3 {
             color: inherit;
-        }
-
-        /* Fix for "Register Today" heading and "Step X of Y" text in light theme */
-        body:not(.dark) .registration-card h2 {
-            color: #1a202c;
-        }
-        body:not(.dark) .registration-card p {
-            color: #4a5568;
         }
 
         /* Input Fields - Default neutral state */
@@ -101,7 +119,7 @@
             border: 1px solid #cbd5e0;
             outline: none;
             box-shadow: none;
-            transition: border-color 0.2s ease-in-out;
+            transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
             border-radius: 0.5rem;
         }
         input::placeholder, select::placeholder, textarea::placeholder {
@@ -118,6 +136,27 @@
             border: 1px solid #444; /* Darker border for contrast */
             box-shadow: 0 0 5px rgba(0,0,0,0.2); /* Subtle shadow for depth */
         }
+        
+        /* NEW: Styles for inputs inside transparent cards */
+        .registration-card input,
+        .registration-card select,
+        .registration-card textarea,
+        .info-card textarea {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+        }
+
+        body.dark .registration-card input,
+        body.dark .registration-card select,
+        body.dark .registration-card textarea,
+        body.dark .info-card textarea {
+            background-color: rgba(0, 0, 0, 0.25);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: var(--color-soft-white);
+        }
+
+
         body.dark input::placeholder,
         body.dark select::placeholder,
         body.dark textarea::placeholder {
@@ -162,15 +201,6 @@
         .landing-subheading {
             color: #F0F0F0;
         }
-        /* NEW: Styles for the pricing box on the landing page */
-        .landing-pricing-card {
-            background-color: var(--color-dark-bg-secondary);
-            border: 1px solid #4a5568;
-        }
-        body:not(.dark) .landing-pricing-card {
-            background-color: var(--color-light-bg-secondary);
-            border: 1px solid #e2e8f0;
-        }
 
         /* Floating label styles */
         .relative.group input,
@@ -195,7 +225,7 @@
             pointer-events: none;
             transition: all 0.2s ease-out;
             font-size: 1rem;
-            color: #666666;
+            color: #cccccc; /* Lighter gray for light mode transparent card */
         }
         /* MODIFIED: Ensure floating label color is consistent with placeholders in dark mode */
         body.dark .relative.group label {
@@ -416,13 +446,13 @@
         /* New styles for price highlighting */
         .original-price {
             text-decoration: line-through;
-            color: #999;
+            color: #dddddd;
             font-size: 1rem;
             margin-right: 8px;
         }
 
         .discounted-price {
-            color: #d32f2f;
+            color: var(--color-blue-accent);
             font-weight: bold;
             font-size: 1.5rem;
             animation: pulse 1.2s infinite;
@@ -436,7 +466,8 @@
 
         /* Price Display Box Styling */
         .price-display-box {
-            background: linear-gradient(to right, #fff3e0, #ffe0b2);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 12px;
             padding: 12px 20px;
             display: inline-block;
@@ -446,7 +477,8 @@
         }
 
         body.dark .price-display-box {
-            background-color: var(--color-dark-bg-secondary);
+            background-color: rgba(0,0,0,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
@@ -456,7 +488,7 @@
         }
 
         body.dark .price-display-box .discounted-price {
-            color: var(--color-error-red);
+            color: var(--color-blue-accent);
         }
 
         /* Ensure the "Limited Time!" span remains visible in dark mode */
@@ -479,15 +511,15 @@
 
     <div id="background-video-container">
         <iframe id="background-youtube-player"
-            src="https://www.youtube-nocookie.com/embed/u2IEDVXPcc8?controls=0&autoplay=1&mute=1&loop=1&playlist=u2IEDVXPcc8&modestbranding=1&rel=0&enablejsapi=1"
-            frameborder="0"
-            allow="autoplay; encrypted-media;"
-            allowfullscreen>
+                src="https://www.youtube-nocookie.com/embed/u2IEDVXPcc8?controls=0&autoplay=1&mute=1&loop=1&playlist=u2IEDVXPcc8&modestbranding=1&rel=0&enablejsapi=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media;"
+                allowfullscreen>
         </iframe>
     </div>
 
     <button id="darkModeToggle" class="fixed top-4 right-4 z-50 p-3 rounded-full shadow-lg focus:outline-none transition-colors duration-300">
-        <i class="fas fa-moon" id="darkModeIcon"></i>
+        <i class="fas fa-sun" id="darkModeIcon"></i>
     </button>
 
     <div id="pages">
@@ -501,107 +533,69 @@
             <div class="container mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20 relative z-10">
                 <div class="text-center lg:text-left lg:w-1/2">
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-poppins font-bold leading-tight landing-heading mb-6">
-                        The Achievers Program
+                        🏠 Work From Home & Unlock Your Earning Potential
                     </h1>
                     <p class="text-lg sm:text-xl landing-subheading mb-4 max-w-lg mx-auto lg:mx-0">
-                        🏠 3-Day Training Program: Computer skills and excel training Your Path to a Supplementary Income <br>
-                        We offer a comprehensive 3-day online training program designed to equip you with the skills needed to start a work-from-home career. No prior experience is necessary, just a smartphone and a good internet connection. This training is perfect for students, homemakers, and anyone looking to build a secondary income stream.
+                        ⏰ Just 3–4 Hours a Day | No Prior Experience Needed <br>
+                        We offer a flexible work-from-home opportunity where you can achieve significant earnings based on your consistent effort and dedication, by working just 3 to 4 hours a day. All work is online, so you can do it from home with just a smartphone and a good internet connection. This is ideal for students, homemakers, part-timers, or anyone looking to build a secondary income stream.
                     </p>
-                    <p class="text-sm italic text-gray-300 mt-4 block">
-                        *Individual results may vary. Earnings are dependent on consistent effort, skills, and market conditions.
+                    <!-- Removed the bulleted list of roles as per the image -->
+                    <p class="text-sm italic text-gray-300 mt-4 block">*Individual results may vary. Earnings are dependent on effort, skills, and market conditions.</p>
+                    <p class="text-lg sm:text-xl font-semibold landing-subheading mb-8 max-w-lg mx-auto lg:mx-0">
+                        👉 Register Now to unlock access to our Free Introduction Session and discover how you can get started today!
                     </p>
                 </div>
 
-                <div class="w-full lg:w-1/2 rounded-3xl shadow-xl border p-8 sm:p-10 registration-card">
-                    <!-- NEW: Pricing and Description Block -->
-                    <div class="w-full mb-8 rounded-2xl p-6 shadow-xl landing-pricing-card text-left">
-                        <h3 class="text-2xl font-poppins font-bold mb-4">
-                           Enroll in Our Program Today!
-                        </h3>
-                        <div class="flex items-center justify-start mb-4">
-                            <div class="price-display-box !bg-transparent !shadow-none !p-0">
-                                <span class="original-price">₹195</span>
-                                <span class="discounted-price text-3xl">₹136.50</span>
-                                <span style="background:#ff5252; color:white; padding:2px 6px; border-radius:4px; font-size:0.75rem; margin-left:8px;">30% Off!</span>
-                            </div>
-                        </div>
-                        <p class="text-md leading-relaxed mb-4">
-                            This one-time fee of ₹136.50 covers your access to comprehensive training, mentorship, and a thriving community. You get:
-                        </p>
-                        <div class="space-y-3 mb-6">
-                            <div class="flex items-start">
-                                <i class="fas fa-book text-blue-accent text-xl mr-3 mt-1"></i>
-                                <span class="text-md">Comprehensive Training & Resources</span>
-                            </div>
-                            <div class="flex items-start">
-                                <i class="fas fa-headset text-blue-accent text-xl mr-3 mt-1"></i>
-                                <span class="text-md">Dedicated Mentorship & Support</span>
-                            </div>
-                            <div class="flex items-start">
-                                <i class="fab fa-whatsapp text-success-green text-xl mr-3 mt-1"></i>
-                                <span class="text-md">Exclusive Community Access</span>
-                            </div>
-                            <div class="flex items-start">
-                                <i class="fas fa-briefcase text-blue-accent text-xl mr-3 mt-1"></i>
-                                <span class="text-md">Guidance for Work Opportunities</span>
-                            </div>
-                            <div class="flex items-start">
-                                <i class="fas fa-chart-line text-blue-accent text-xl mr-3 mt-1"></i>
-                                <span class="text-md">Skill Tracking & Growth Tools</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END NEW BLOCK -->
-                    
-                    <h2 class="text-2xl font-poppins font-semibold text-center mb-8">Register for the Training!</h2>
+                <div class="w-full lg:w-1/2 rounded-3xl shadow-xl p-8 sm:p-10 registration-card">
+                    <h2 class="text-2xl font-poppins font-semibold text-center mb-8">Register Today!</h2>
 
                     <form id="registration-form" action="https://script.google.com/macros/s/AKfycbz01zTSVv9528tk3YcYrlecPL6jY0Qff63Xj7zzwDzDbrWTfQ40sNX3dWXs4YvwKgMf/exec" method="post" class="space-y-6">
                         <div class="relative group">
                             <input type="text" id="name" name="name" placeholder=" " required
-                                class="peer block w-full px-4 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 placeholder-transparent">
+                                   class="peer block w-full px-4 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 placeholder-transparent">
                             <label for="name" class="absolute left-4 transition-all duration-200 transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-focus:scale-85 peer-focus:text-blue-accent text-base">Name</label>
                         </div>
                         <div class="relative group">
                             <input type="text" id="city" name="city" placeholder=" " required
-                                class="peer block w-full px-4 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 placeholder-transparent">
+                                   class="peer block w-full px-4 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 placeholder-transparent">
                             <label for="city" class="absolute left-4 transition-all duration-200 transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-focus:scale-85 peer-focus:text-blue-accent text-base">City</label>
                         </div>
                         <div class="relative group">
                             <input type="email" id="email" name="email" placeholder=" " required
-                                class="peer block w-full px-4 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 placeholder-transparent">
+                                   class="peer block w-full px-4 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 placeholder-transparent">
                             <label for="email" class="absolute left-4 transition-all duration-200 transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-focus:scale-85 peer-focus:text-blue-accent text-base">Email</label>
                         </div>
                         <div class="relative group">
                             <input type="tel" id="phone" name="phone" placeholder=" " required
-                                class="peer block w-full px-4 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 placeholder-transparent">
+                                   class="peer block w-full px-4 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 placeholder-transparent">
                             <label for="phone" class="absolute left-4 transition-all duration-200 transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-focus:scale-85 peer-focus:text-blue-accent text-base">Phone Number</label>
                         </div>
                         <div class="relative group">
                             <input type="number" id="age" name="age" placeholder=" " required min="18"
-                                class="peer block w-full px-4 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 placeholder-transparent">
+                                   class="peer block w-full px-4 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 placeholder-transparent">
                             <label for="age" class="absolute left-4 transition-all duration-200 transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-focus:scale-85 peer-focus:text-blue-accent text-base">Age</label>
                             <span id="age-error" class="text-sm text-error-red mt-1 hidden">Minimum age required is 18.</span>
                         </div>
 
                         <div class="relative group">
                             <select id="gender" name="gender" required
-                                class="peer block w-full px-4 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 bg-white dark:bg-gray-700 appearance-none pr-8">
+                                    class="peer block w-full px-4 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 appearance-none pr-8">
                                 <option value="" disabled selected>Select Gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                                 <option value="prefer_not_to_say">Prefer not to say</option>
                             </select>
                             <label for="gender" class="absolute left-4 transition-all duration-200 transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-focus:scale-85 peer-focus:text-blue-accent text-base">Gender</label>
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-gray-200">
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-200">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 6.096 6.924 4.682 8.338z"/></svg>
                             </div>
                         </div>
                         <div id="submissionStatusDisplay" class="mt-4 p-2 rounded-lg text-center">
                         </div>
-                        
+
                         <button type="submit"
-                            class="w-full py-3 mt-4 rounded-xl font-bold text-lg gradient-button shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-accent transition duration-300">
-                            Register Now <i class="fas fa-arrow-right ml-2"></i>
+                                class="w-full py-3 mt-4 rounded-xl font-bold text-lg gradient-button shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-accent transition duration-300">
+                            Get Started <i class="fas fa-arrow-right ml-2"></i>
                         </button>
                     </form>
                 </div>
@@ -613,10 +607,10 @@
                 <div class="lg:w-2/3 w-full relative">
                     <div class="relative pb-[56.25%] h-0 rounded-2xl overflow-hidden shadow-2xl">
                         <iframe id="youtube-player" class="absolute top-0 left-0 w-full h-full"
-                            src="https://www.youtube.com/embed/xl2DncwaRNY?enablejsapi=1&autoplay=0&controls=0&modestbranding=1&rel=0"
-                            title="YouTube video player" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
+                                src="https://www.youtube.com/embed/xl2DncwaRNY?enablejsapi=1&autoplay=0&controls=0&modestbranding=1&rel=0"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
                         <div id="play-button-overlay" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 cursor-pointer transition-opacity duration-300">
                             <div class="p-6 rounded-full pulse-animation bg-dark-bg-secondary text-blue-accent">
                                 <i class="fas fa-play text-3xl" id="overlayPlayPauseIcon"></i>
@@ -628,24 +622,24 @@
                 <div class="lg:w-1/3 w-full p-8 rounded-2xl shadow-xl flex flex-col justify-between info-card">
                     <div>
                         <h2 class="text-3xl font-poppins font-bold mb-6">
-                            Secure Your Training Spot!
+                            Watch the full video to Unlock your Job Opportunity!
                         </h2>
                         <div id="paymentDetails" class="hidden">
                             <p class="text-lg mb-4 leading-relaxed">
-                                Congratulations! You've completed the introductory session. You can now enroll in our 3-day training program.
+                                Congratulations! You've completed the introductory session. You now have access to the next steps for your work-from-home opportunity.
                             </p>
                             <div class="price-display-box">
-                                <span style="font-size: 1rem; color: #444;">Your one-time registration fee: </span>
+                                <span style="font-size: 1rem;">Your one-time registration fee: </span>
                                 <span class="original-price">₹195</span>
-                                <span class="discounted-price">₹136.50</span>
-                                <span style="background:#ff5252; color:white; padding:2px 6px; border-radius:4px; font-size:0.75rem; margin-left:8px;">30% Off!</span>
+                                <span class="discounted-price">₹49</span>
+                                <span style="background:#ff5252; color:white; padding:2px 6px; border-radius:4px; font-size:0.75rem; margin-left:8px;">Limited Time!</span>
                             </div>
-                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                                This one-time fee of ₹136.50 covers your access to comprehensive training modules, a dedicated support platform, and exclusive community resources designed to help you succeed.
+                            <p class="text-sm mb-4">
+                                This one-time fee of ₹49 covers your access to comprehensive training modules, a dedicated support platform, and exclusive community resources designed to help you succeed.
                             </p>
 
                             <div class="space-y-4 mb-10">
-                                <h3 class="text-xl font-poppins font-semibold mb-4">✅ Your Training Enrollment Includes:</h3>
+                                <h3 class="text-xl font-poppins font-semibold mb-4">✅ You Now Have Access To:</h3>
                                 <div class="flex items-center">
                                     <i class="fas fa-book text-blue-accent text-2xl mr-4"></i>
                                     <span class="text-lg">Comprehensive Training & Resources</span>
@@ -658,29 +652,30 @@
                                     <i class="fab fa-whatsapp text-success-green text-2xl mr-4"></i>
                                     <span class="text-lg">Exclusive Community Access</span>
                                 </div>
+                                <!-- New items added here -->
                                 <div class="flex items-center">
                                     <i class="fas fa-briefcase text-blue-accent text-2xl mr-4"></i>
-                                    <span class="text-lg">Guidance for Work Opportunities</span>
+                                    <span class="text-lg">Direct Access to Work Opportunities</span>
                                 </div>
                                 <div class="flex items-center">
                                     <i class="fas fa-chart-line text-blue-accent text-2xl mr-4"></i>
-                                    <span class="text-lg">Skill Tracking & Growth Tools</span>
+                                    <span class="text-lg">Performance Tracking & Growth Tools</span>
                                 </div>
                             </div>
 
                             <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
                                 <h3 class="text-xl font-poppins font-semibold mb-4">
-                                    💫 Have a question? Ask away!
+                                    💫 Want to see how this fits your goals? Ask away!
                                 </h3>
                                 <div class="relative group mb-4">
                                     <textarea id="userGoalInput"
-                                        class="peer block w-full px-4 pt-4 pb-2 h-28 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 placeholder-transparent resize-y"></textarea>
+                                              class="peer block w-full px-4 pt-4 pb-2 h-28 border rounded-lg shadow-sm focus:outline-none transition-all duration-200 placeholder-transparent resize-y"></textarea>
                                     <label for="userGoalInput" class="absolute left-4 transition-all duration-200 transform peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-focus:scale-85 peer-focus:text-blue-accent text-base">
                                         Question?
                                     </label>
                                 </div>
                                 <button id="generateBenefitBtn"
-                                    class="w-full py-3 rounded-xl font-bold text-lg bg-blue-accent text-dark-bg-primary hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-accent transition duration-300">
+                                        class="w-full py-3 rounded-xl font-bold text-lg bg-blue-accent text-dark-bg-primary hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-accent transition duration-300">
                                     See My Custom Fit ✨
                                 </button>
                                 <div id="aiLoadingSpinner" class="hidden flex justify-center items-center mt-4">
@@ -694,23 +689,11 @@
 
                     <div class="sticky-cta-wrapper lg:static mt-auto lg:mt-0" id="payment-cta-wrapper">
                         <button id="payNowButton"
-                            class="glassmorphism-btn w-full py-4 rounded-xl font-bold text-xl uppercase transition duration-300 relative overflow-hidden group">
-                            Enroll Now for ₹136.50 <div class="confetti-container"></div>
+                                class="glassmorphism-btn w-full py-4 rounded-xl font-bold text-xl uppercase transition duration-300 relative overflow-hidden group">
+                            Start Your Journey <div class="confetti-container"></div>
                         </button>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="payment-page" class="min-h-screen flex flex-col items-center justify-center p-4 hidden">
-            <div class="rounded-2xl shadow-xl text-center border p-10 payment-processing-card">
-                <div class="spinner mx-auto mb-6"></div>
-                <h2 class="text-3xl font-poppins font-bold mb-4">
-                    Processing Your Enrollment...
-                </h2>
-                <p class="text-lg">
-                    You will be securely redirected to our payment partner (Razorpay / Instamojo / PayPal) in a moment to complete your registration.
-                </p>
             </div>
         </section>
 
@@ -722,17 +705,17 @@
                     <i class="fas fa-check-circle"></i>
                 </div>
                 <h2 class="text-4xl font-poppins font-bold mb-4">
-                    You're In! 🎉
+                    Registration Received! 🎉
                 </h2>
                 <p class="text-xl mb-6">
-                    We've received your ₹136.50 registration fee. Your training is starting soon!
+                    Thank you for your interest! Please message us on WhatsApp to proceed.
                 </p>
 
                 <p class="text-lg mb-4">
-                    Sending you a WhatsApp message now...
+                    Sir will share the QR code and registration form on WhatsApp. From there, sir will guide you through the next steps.
                 </p>
                 <a href="https://wa.me/message/YM7TYTM2QYZ7E1" target="_blank"
-                    class="inline-flex items-center px-6 py-3 bg-[#25D366] text-white font-bold rounded-xl shadow-lg hover:bg-[#1DA851] transition-colors duration-300">
+                   class="inline-flex items-center px-6 py-3 bg-[#25D366] text-white font-bold rounded-xl shadow-lg hover:bg-[#1DA851] transition-colors duration-300">
                     <i class="fab fa-whatsapp text-2xl mr-3"></i> Message Akash Habib on WhatsApp
                 </a>
             </div>
@@ -743,8 +726,8 @@
                 <h2 class="text-3xl font-poppins font-bold mb-6 text-center">About Us</h2>
                 <div class="prose dark:prose-invert max-w-none">
                     <p>Welcome to our platform, where we believe in empowering individuals to achieve financial independence and professional growth from the comfort of their homes.</p>
-                    <p>We are dedicated to providing accessible and flexible online training programs, designed for a diverse audience including students, homemakers, part-timers, and anyone seeking to build a sustainable secondary income stream.</p>
-                    <p>Our mission is to equip you with the necessary tools, training, and support to succeed. We focus on practical skills and a community-driven approach to ensure that every participant can thrive. With our comprehensive resources, dedicated mentorship, and an exclusive community, you're not just finding a course – you're building a foundation for your future.</p>
+                    <p>We are dedicated to providing accessible and flexible work-from-home opportunities, designed for a diverse audience including students, homemakers, part-timers, and anyone seeking to build a sustainable secondary income stream.</p>
+                    <p>Our mission is to equip you with the necessary tools, training, and support to succeed. We focus on practical skills and a community-driven approach to ensure that every participant can thrive. With our comprehensive resources, dedicated mentorship, and an exclusive community, you're not just finding a job – you're building a future.</p>
                     <p>Join us to unlock your potential, gain valuable experience, and take control of your earning journey. We are committed to fostering an.environment where hard work translates directly into tangible results, helping you earn a supplementary income based on your effort and market conditions.</p>
                     <h3 class="text-xl font-poppins font-semibold mt-6 mb-3">Contact Information:</h3>
                     <p><strong>Name:</strong> Akash Habib</p>
@@ -761,8 +744,8 @@
             <div class="container mx-auto p-8 rounded-2xl shadow-xl border policy-card max-w-3xl">
                 <h2 class="text-3xl font-poppins font-bold mb-6 text-center">Refund Policy</h2>
                 <div class="prose dark:prose-invert max-w-none">
-                    <p>Our refund policy is in line with our digital service delivery model. As our training program provides immediate access to resources, training, and community upon successful registration, all registration fees are generally non-refundable.</p>
-                    <p>If you encounter technical issues that prevent you from accessing the training services, and these issues cannot be resolved by our support team, a refund may be considered on a case-by-case basis.</p>
+                    <p>Our refund policy is in line with our digital service delivery model. As our work-from-home opportunity provides immediate access to resources, training, and community upon successful registration, all registration fees are generally non-refundable.</p>
+                    <p>If you encounter technical issues that prevent you from accessing the services, and these issues cannot be resolved by our support team, a refund may be considered on a case-by-case basis.</p>
                     <p>Any refund requests must be submitted within 7 days of registration and must be accompanied by evidence of the technical issue. We do not offer refunds for changes of mind, lack of participation, or dissatisfaction with earnings potential, as results vary based on individual effort and market conditions.</p>
                     <p>Once the refund is approved, the amount will be credited to original payment method within 5-7 business days.</p>
                     <p>By proceeding with registration, you acknowledge and agree to this refund policy.</p>
@@ -794,10 +777,10 @@
                         <li>To enable user-to-user communications.</li>
                         <li>To request feedback and to contact you about your use of our website.</li>
                     </ul>
-                    
+
                     <h3>3. Sharing Your Information</h3>
                     <p>We only share information with your consent, to comply with laws, to provide you with services, to protect your rights, or to fulfill business obligations.</p>
-                    
+
                     <h3>4. Security of Your Information</h3>
                     <p>We aim to protect your personal information through a system of organizational and technical security measures. We have implemented appropriate technical and organizational security measures designed to protect the security of any personal information we process. However, please also remember that we cannot guarantee that the internet itself is 100% secure. Although we will do our best to protect your personal information, transmission of personal information to and from our website is at your own risk. You should only access the services within a secure environment.</p>
 
@@ -814,7 +797,7 @@
             <div class="container mx-auto p-8 rounded-2xl shadow-xl border policy-card max-w-3xl">
                 <h2 class="text-3xl font-poppins font-bold mb-6 text-center">Disclaimer</h2>
                 <div class="prose dark:prose-invert max-w-none">
-                    <p>The information provided on this website and through our training program is for general informational purposes only. While we strive to provide accurate and up-to-date information, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose.</p>
+                    <p>The information provided on this website and through our work-from-home opportunity is for general informational purposes only. While we strive to provide accurate and up-to-date information, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose.</p>
                     <p>Any reliance you place on such information is therefore strictly at your own risk. We do not guarantee any specific income level or earnings. The income potential mentioned is an estimate based on average performance and requires consistent effort, dedication, and adherence to our guidelines. Individual results may vary significantly based on effort, skills, and market conditions.</p>
                     <p>Through this website, you may be able to link to other websites which are not under the control of Legacy of Achievers. We have no control over the nature, content, and availability of those sites. The inclusion of any links does not necessarily imply a recommendation or endorse the views expressed within them.</p>
                     <p>Every effort is made to keep the website up and running smoothly. However, Legacy of Achievers takes no responsibility for, and will not be liable for, the website being temporarily unavailable due to technical issues beyond our control.</p>
@@ -851,7 +834,7 @@
                     <p>In no event shall Legacy of Achievers or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on this website, even if Legacy of Achievers or a Legacy of Achievers authorized representative has been notified orally or in writing of the possibility of such damage.</p>
 
                     <h3>5. Governing Law</h3>
-                    <p>These terms and conditions are governed by and construed in accordance with the laws of India and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.</p>
+                    <p>These terms and conditions are governed by and construed in accordance with the laws of India, specifically the State of Karnataka, and you irrevocably submit to the exclusive jurisdiction of the courts located in Karnataka, India.</p>
                 </div>
                 <div class="text-center mt-8">
                     <button onclick="showPage('landing-page')" class="glassmorphism-btn py-3 px-6 rounded-xl font-bold text-lg">Back to Home</button>
@@ -880,7 +863,6 @@
         // DOM Elements
         const landingPage = document.getElementById('landing-page');
         const videoPage = document.getElementById('video-page');
-        const paymentPage = document.getElementById('payment-page');
         const successPage = document.getElementById('success-page');
         // New Policy Pages
         const aboutUsPage = document.getElementById('about-us-page');
@@ -1110,12 +1092,14 @@
             const parentGroup = input.closest('.group');
             if (!parentGroup) return; // Exit if parent group is not found
 
-            // Determine default border color based on current theme
+            // Determine default border color based on current theme and location (inside registration card or not)
             let defaultBorderColor;
+            const isInRegCard = input.closest('.registration-card');
+
             if (document.body.classList.contains('dark')) {
-                defaultBorderColor = '#444'; /* Updated to match new dark input border */
+                defaultBorderColor = isInRegCard ? 'rgba(255, 255, 255, 0.1)' : '#444';
             } else {
-                defaultBorderColor = '#cbd5e0'; // Light theme default border
+                defaultBorderColor = isInRegCard ? 'rgba(255, 255, 255, 0.2)' : '#cbd5e0';
             }
 
             // Check if input has a value or is a selected option for select fields
@@ -1298,18 +1282,14 @@
             }
         });
 
-        // Pay Now Button Click (from Video Page to Payment Page)
+        // Pay Now Button Click (from Video Page to Success Page)
         payNowButton.addEventListener('click', () => {
-            console.log("Pay Now button clicked. Redirecting to payment page.");
-            showPage('payment-page');
-
-            // Simulate payment processing and then redirect to success page
-            setTimeout(() => {
-                showPage('success-page');
-                // Trigger confetti effect on success page
-                createConfetti(document.querySelector('.confetti-backdrop-container'), true); // Larger confetti burst for success page
-            }, 3000); // Simulate 3 seconds payment processing
+            console.log("Pay Now button clicked. Redirecting to success page.");
+            showPage('success-page');
+            // Trigger confetti effect on success page
+            createConfetti(document.querySelector('.confetti-backdrop-container'), true);
         });
+
 
         /**
          * Creates and animates confetti particles.
@@ -1474,9 +1454,9 @@
             // Updated prompt to answer questions based on the provided information
             const opportunityInfo = `Register with us and start your journey with a brief 3-day training. Work 3 to 4 hours daily and earn a supplementary income based on your effort. All work is online, so you can do it from home with just a smartphone and a good internet connection. Our roles include lead generation (identifying and connecting with potential clients), team management (supporting and coordinating small teams), social media handling (managing and creating engaging content), and recruitment support (assisting in the onboarding process for new team members). For further details, register now!`;
 
-            const prompt = `Based on the following information about our training program, please answer the user's question. If the question cannot be answered from the provided information, politely state that.
+            const prompt = `Based on the following information about our work-from-home opportunity, please answer the user's question. If the question cannot be answered from the provided information, politely state that.
             
-            Training Program Details: "${opportunityInfo}"
+            Work-from-home Opportunity Details: "${opportunityInfo}"
 
             User's Question: "${userQuestion}"
 
@@ -1552,6 +1532,3 @@
     </script>
 </body>
 </html>
-
-
-
